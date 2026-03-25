@@ -29,7 +29,7 @@ Trong giai đoạn đầu, nhóm sẽ tập trung thực hiện các nội dung 
 
 ## Thành viên nhóm
 - Phương
-- Sơn
+-Lại Sơn
 - Vinh
 
 ## Phân công sơ bộ
