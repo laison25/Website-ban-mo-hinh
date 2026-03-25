@@ -29,13 +29,16 @@ Trong giai đoạn đầu, nhóm sẽ tập trung thực hiện các nội dung 
 
 ## Thành viên nhóm
 - Phương
--Lại Sơn
+- Lại Sơn
 - Vinh
 
 ## Phân công sơ bộ
 - **Phương**: phụ trách thiết kế giao diện website, bố cục trang chủ và trang sản phẩm
-- **Sơn**: phụ trách phần dữ liệu, chức năng sản phẩm và tìm kiếm
+- **Lại Sơn**: phụ trách phần dữ liệu, chức năng sản phẩm và tìm kiếm
 - **Vinh**: phụ trách giỏ hàng, đặt hàng và hỗ trợ hoàn thiện các chức năng còn lại
+
+## Tài liệu SRS đã hoàn thiện
+- [SRS chức năng Đăng nhập hệ thống](./SRS_dang_nhap_website_ban_mo_hinh.md)
 
 ## Ghi chú
 Đây là phần mô tả ban đầu của dự án. Trong quá trình thực hiện, nhóm sẽ tiếp tục cập nhật thêm chức năng, công nghệ sử dụng và tiến độ hoàn thành lên README.
