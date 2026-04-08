@@ -33,8 +33,8 @@ Trong giai đoạn đầu, nhóm sẽ tập trung thực hiện các nội dung 
 - Vinh
 
 ## Phân công sơ bộ
-- **Phương**: phụ trách thiết kế giao diện website, bố cục trang chủ và trang sản phẩm
-- **Lại Sơn**: phụ trách phần dữ liệu, chức năng sản phẩm và tìm kiếm
+- **Lại Sơn**: phụ trách thiết kế giao diện website, bố cục trang chủ và trang sản phẩm
+- **Phương**: phụ trách phần dữ liệu, chức năng sản phẩm và tìm kiếm
 - **Vinh**: phụ trách giỏ hàng, đặt hàng và hỗ trợ hoàn thiện các chức năng còn lại
 
 ## Tài liệu SRS đã hoàn thiện
