@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+    <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#182b5a"/><stop offset="1" stop-color="#00d1ff"/></linearGradient></defs>
+    <rect width="1200" height="800" fill="url(#g)"/>
+    <circle cx="250" cy="250" r="180" fill="#fff" opacity=".12"/>
+    <circle cx="900" cy="520" r="240" fill="#fff" opacity=".08"/>
+    <path d="M120 610 C 320 280, 600 260, 1040 80" stroke="#fff" stroke-width="18" fill="none" opacity=".35"/>
+    <rect x="70" y="60" width="180" height="50" rx="25" fill="#fff" opacity=".15"/>
+    <text x="160" y="94" text-anchor="middle" font-size="28" font-family="Arial" fill="#fff">Lzon Poke</text>
+    <text x="80" y="610" font-size="92" font-family="Arial" font-weight="700" fill="#fff">SCALE FIGURES</text>
+    <text x="80" y="680" font-size="34" font-family="Arial" fill="#fff">Layout demo theo cảm hứng từ Figma của nhóm</text>
+    </svg>
