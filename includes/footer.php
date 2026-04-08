@@ -1,3 +1,4 @@
+<?php $scriptVersion = file_exists(__DIR__ . '/../assets/js/main.js') ? filemtime(__DIR__ . '/../assets/js/main.js') : time(); ?>
 <footer class="site-footer" id="footer">
   <div class="container footer-grid">
     <div><h4>Shop Lzon</h4><p>Get 10% off your first order</p><form class="subscribe-form"><input type="email" placeholder="Enter your email"><button type="button">➤</button></form></div>
@@ -8,6 +9,6 @@
   </div>
   <div class="footer-bottom">© Copyright Rimel 2022. All rights reserved</div>
 </footer>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js?v=<?php echo $scriptVersion; ?>"></script>
 </body>
 </html>

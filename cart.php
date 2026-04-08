@@ -2,6 +2,33 @@
 require_once __DIR__ . '/data/products.php';
 require_once __DIR__ . '/includes/cart-functions.php';
 
+function redirect_back(string $fallback, array $params = []): void
+{
+    $target = $fallback;
+    $referer = $_SERVER['HTTP_REFERER'] ?? '';
+
+    if ($referer !== '') {
+        $parts = parse_url($referer);
+        $path = $parts['path'] ?? '';
+        if ($path !== '') {
+            $target = basename($path);
+            if (!empty($parts['query'])) {
+                parse_str($parts['query'], $query);
+                unset($query['cart_open'], $query['added'], $query['updated'], $query['removed'], $query['checkout']);
+                $params = array_merge($query, $params);
+            }
+        }
+    }
+
+    $queryString = http_build_query($params);
+    if ($queryString !== '') {
+        $target .= '?' . $queryString;
+    }
+
+    header('Location: ' . $target);
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
     $productId = isset($_POST['product_id']) ? (int) $_POST['product_id'] : 0;
@@ -13,27 +40,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             add_to_cart($productId, $quantity);
         }
 
-        header('Location: cart.php?added=1');
-        exit;
+        redirect_back('cart.php', ['cart_open' => 1, 'added' => 1]);
     }
 
     if ($action === 'update') {
         $quantity = isset($_POST['quantity']) ? max(0, (int) $_POST['quantity']) : 0;
         update_cart_quantity($productId, $quantity);
-        header('Location: cart.php?updated=1');
-        exit;
+        redirect_back('cart.php', ['updated' => 1]);
     }
 
     if ($action === 'remove') {
         remove_from_cart($productId);
-        header('Location: cart.php?removed=1');
-        exit;
+        redirect_back('cart.php', ['removed' => 1]);
     }
 
     if ($action === 'checkout') {
         clear_cart();
-        header('Location: cart.php?checkout=1');
-        exit;
+        redirect_back('cart.php', ['checkout' => 1]);
     }
 }
 

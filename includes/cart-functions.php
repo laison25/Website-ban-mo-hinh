@@ -71,3 +71,14 @@ function get_cart_items(array $products): array
 
     return $items;
 }
+
+function get_cart_total(array $products): int
+{
+    $total = 0;
+
+    foreach (get_cart_items($products) as $item) {
+        $total += (int) $item['line_total'];
+    }
+
+    return $total;
+}

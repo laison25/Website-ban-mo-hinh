@@ -1,4 +1,32 @@
 document.addEventListener('DOMContentLoaded', function () {
+  const cartWrap = document.querySelector('.cart-menu-wrap');
+  const cartToggle = document.querySelector('.cart-toggle');
+  const miniCartPanel = document.getElementById('miniCartPanel');
+  const shouldOpenCart = document.body && document.body.getAttribute('data-cart-open') === '1';
+
+  if (cartWrap && cartToggle && miniCartPanel) {
+    const setCartOpen = (open) => {
+      cartWrap.classList.toggle('is-open', open);
+      miniCartPanel.classList.toggle('is-open', open);
+      cartToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+
+    cartToggle.addEventListener('click', function (event) {
+      event.preventDefault();
+      setCartOpen(!miniCartPanel.classList.contains('is-open'));
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!cartWrap.contains(event.target)) {
+        setCartOpen(false);
+      }
+    });
+
+    if (shouldOpenCart) {
+      setCartOpen(true);
+    }
+  }
+
   const countdown = document.querySelector('.countdown');
   if (countdown) {
     let totalSeconds = 3 * 24 * 60 * 60 + 23 * 60 * 60 + 19 * 60 + 56;
