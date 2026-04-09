@@ -1,8 +1,11 @@
 # Software Requirement Specification (SRS)
 ## Chức năng: Đăng nhập hệ thống
+
 **Mã chức năng:** AUTH-01  
-**Trạng thái:** Draft  
+**Trạng thái:** Hoàn thành bước đầu  
 **Dự án:** Website bán mô hình  
+**Nhóm trưởng:** Lại Sơn  
+**Thành viên:** Phương, Vinh  
 
 ---
 
@@ -34,11 +37,11 @@ Hệ thống đảm bảo việc xác thực thông tin an toàn, đúng tài kh
 - `role`: quyền người dùng (`user` hoặc `admin`)
 
 ### 4. Ràng buộc kỹ thuật & bảo mật (Technical Constraints)
-- Mật khẩu phải được lưu dưới dạng mã hóa, không lưu dạng văn bản thường
+- Mật khẩu phải được lưu dưới dạng mã hóa, không lưu ở dạng văn bản thường
 - Hệ thống kiểm tra đầy đủ dữ liệu trước khi xác thực
 - Nếu nhập sai tài khoản hoặc mật khẩu thì không cho phép đăng nhập
 - Sau khi đăng nhập thành công, hệ thống tạo session cho người dùng
-- Admin và người dùng thường được chuyển đến giao diện phù hợp với quyền của mình
+- Admin và người dùng sẽ được chuyển đến giao diện phù hợp với quyền của mình
 
 ### 5. Trường hợp ngoại lệ & xử lý lỗi (Edge Cases)
 - **Trường hợp:** Bỏ trống tên đăng nhập hoặc mật khẩu  
@@ -58,3 +61,6 @@ Hệ thống đảm bảo việc xác thực thông tin an toàn, đúng tài kh
 - Giao diện đơn giản, dễ nhìn, dễ sử dụng
 - Hỗ trợ hiển thị thông báo lỗi khi người dùng nhập sai
 - Có thể mở rộng thêm chức năng “Hiện mật khẩu” hoặc “Nhớ tài khoản” nếu cần
+
+### 7. Ghi chú
+Tài liệu này là bản SRS ban đầu cho chức năng đăng nhập của dự án website bán mô hình. Nội dung sẽ tiếp tục được cập nhật trong quá trình nhóm phát triển và hoàn thiện hệ thống.
