@@ -65,7 +65,7 @@ Hiện tại nhóm đã thực hiện được các nội dung sau:
 - [SRS chức năng Đăng nhập hệ thống](./SRS_dang_nhap_website_ban_mo_hinh.md)
 
 ## Báo cáo tiến độ
-- [Báo cáo tiến độ ngày 03/04/2026](./reports/REPORT_20260403.md)
+- [Báo cáo tiến độ ngày 03/04/2026](./reports/REPORT_03042026.md)
 
 ## Ghi chú
 Đây là phiên bản README cập nhật theo tiến độ hiện tại của nhóm. Trong quá trình thực hiện, nhóm sẽ tiếp tục cập nhật thêm chức năng, tài liệu và tiến độ hoàn thành lên repo GitHub.
