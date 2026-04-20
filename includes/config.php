@@ -14,5 +14,4 @@ const QR_BANK_ID      = 'MB';           // Mã NH: MB, VCB, TCB, BIDV, ACB, VPB.
 const QR_ACCOUNT_NO   = '5519052005';   // Số tài khoản nhận tiền
 const QR_ACCOUNT_NAME = 'NGUYEN VAN PHUONG'; // Tên chủ TK (IN HOA, không dấu)
 const QR_TEMPLATE     = 'compact2';     // compact | compact2 | qr_only
-const DB_PASS = '';
 

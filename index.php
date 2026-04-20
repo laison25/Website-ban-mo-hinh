@@ -138,13 +138,13 @@ include __DIR__ . '/includes/header.php';
                             <form action="<?= url('add-to-cart.php') ?>" method="post">
                                 <input type="hidden" name="product_id" value="<?= (int) $product['id'] ?>">
                                 <input type="hidden" name="qty" value="1">
-                                <button class="small-btn" type="submit">Add To Cart</button>
+                                <button class="small-btn" type="submit">Thêm vào giỏ hàng</button>
                             </form>
                         </div>
                     </article>
                 <?php endforeach; ?>
             </div>
-            <div class="center-actions"><a class="primary-btn" href="#products">View All Products</a></div>
+            <div class="center-actions"><a class="primary-btn" href="#products">Tất cả sản phẩm</a></div>
         </div>
     </section>
 
