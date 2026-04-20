@@ -174,12 +174,13 @@ include __DIR__ . '/includes/header.php';
                                 <div class="price-line"><strong><?= format_currency((float) $product['price']) ?></strong></div>
                                 <div class="card-actions stretch">
                                     <a class="outline-btn small" href="<?= url('product-detail.php?id=' . $product['id']) ?>">Chi tiết</a>
-                                    <form action="<?= url('add-to-cart.php') ?>" method="post">
-                                        <input type="hidden" name="product_id" value="<?= (int) $product['id'] ?>">
-                                        <input type="hidden" name="qty" value="1">
-                                        <button class="small-btn" type="submit">Mua ngay</button>
-                                    </form>
+                                    <a class="small-btn" href="<?= url('product-detail.php?id=' . $product['id']) ?>" style="background:#111;">Mua ngay</a>
                                 </div>
+                                <form action="<?= url('add-to-cart.php') ?>" method="post" style="margin-top:8px;">
+                                    <input type="hidden" name="product_id" value="<?= (int) $product['id'] ?>">
+                                    <input type="hidden" name="qty" value="1">
+                                    <button class="small-btn" type="submit" style="width:100%;">🛒 Thêm vào giỏ hàng</button>
+                                    </form>
                             </div>
                         </article>
                     <?php endforeach; ?>
