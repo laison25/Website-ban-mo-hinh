@@ -121,7 +121,7 @@ include __DIR__ . '/includes/header.php';
             </div>
             <div class="product-grid">
                 <?php foreach ($flashSale as $product): ?>
-                    <article class="product-card figma-card">
+                    <article class="product-card figma-card" id="product-<?= (int) $product['id'] ?>">
                         <a class="product-image" href="<?= url('product-detail.php?id=' . $product['id']) ?>">
                             <img src="<?= url($product['image_path']) ?>" alt="<?= e($product['name']) ?>">
                             <span class="badge-sale">-15%</span>
@@ -163,7 +163,7 @@ include __DIR__ . '/includes/header.php';
             <?php else: ?>
                 <div class="product-grid">
                     <?php foreach ($products as $product): ?>
-                        <article class="product-card figma-card">
+                        <article class="product-card figma-card" id="product-<?= (int) $product['id'] ?>">
                             <a class="product-image" href="<?= url('product-detail.php?id=' . $product['id']) ?>">
                                 <img src="<?= url($product['image_path']) ?>" alt="<?= e($product['name']) ?>">
                                 <?php if ((int) $product['is_featured'] === 1): ?><span class="badge-ribbon">Best Seller</span><?php endif; ?>
