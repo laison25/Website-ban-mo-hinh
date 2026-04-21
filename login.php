@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/includes/init.php';
 $pageTitle = 'Đăng nhập - ' . APP_NAME;
+
 if (is_logged_in()) {
     redirect_to(is_admin() ? 'admin/index.php' : 'index.php');
 }
@@ -31,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'email' => $user['email'],
                 'role' => $user['role'],
             ];
+
             set_flash('success', 'Đăng nhập thành công.');
             redirect_to($user['role'] === 'admin' ? 'admin/index.php' : 'index.php');
         }
@@ -39,31 +41,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 include __DIR__ . '/includes/header.php';
 ?>
+
 <main class="auth-page">
     <div class="container auth-grid">
         <div class="auth-visual large-visual">
             <img src="<?= url('assets/images/products/login-visual.jpg') ?>" alt="Login visual">
         </div>
+
         <div class="auth-card">
             <h1>Log in to Lzon Poke</h1>
             <p>Enter your details below</p>
-            <?php if ($error): ?><div class="flash-message error"><?= e($error) ?></div><?php endif; ?>
+
+            <?php if ($error): ?>
+                <div class="flash-message error"><?= e($error) ?></div>
+            <?php endif; ?>
+
             <form method="post" class="form-card auth-form">
                 <div class="form-group">
                     <input type="text" name="login" value="<?= e($loginValue) ?>" placeholder="Email or Username">
                 </div>
+
                 <div class="form-group">
                     <input type="password" name="password" placeholder="Password">
                 </div>
+
                 <div class="login-actions-row">
                     <button class="primary-btn" type="submit">Log In</button>
                     <a class="text-link" href="<?= url('register.php') ?>">Create account</a>
                 </div>
+
                 <div class="demo-box">
                     <strong>Demo:</strong> admin / 123456 &nbsp; | &nbsp; user / 123456
+                </div>
+
+                <div style="margin-top: 18px; display: flex; flex-direction: column; gap: 10px;">
+                    <a href="http://localhost:8000/auth/google/redirect"
+                       class="primary-btn"
+                       style="text-align:center; text-decoration:none; display:block;">
+                        Đăng nhập bằng Google
+                    </a>
+
+                    <a href="http://localhost:8000/auth/facebook/redirect"
+                       class="primary-btn"
+                       style="text-align:center; text-decoration:none; display:block; background:#1877f2;">
+                        Đăng nhập bằng Facebook
+                    </a>
                 </div>
             </form>
         </div>
     </div>
 </main>
+
 <?php include __DIR__ . '/includes/footer.php'; ?>

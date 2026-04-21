@@ -126,6 +126,17 @@ include __DIR__ . '/includes/header.php';
                             <img src="<?= url($product['image_path']) ?>" alt="<?= e($product['name']) ?>">
                             <span class="badge-sale">-15%</span>
                         </a>
+
+                        <?php
+                        $wishlist = $_SESSION['wishlist'] ?? [];
+                        $isLoved = in_array((int) $product['id'], $wishlist, true);
+                        ?>
+                        <a href="<?= url('wishlist-toggle.php?id=' . (int) $product['id']) ?>"
+                           class="wishlist-btn <?= $isLoved ? 'active' : '' ?>"
+                           title="Yêu thích">
+                            ♥
+                        </a>
+
                         <div class="product-meta">
                             <h3><a href="<?= url('product-detail.php?id=' . $product['id']) ?>"><?= e($product['name']) ?></a></h3>
                             <div class="price-line">
@@ -134,7 +145,17 @@ include __DIR__ . '/includes/header.php';
                                     <span><?= format_currency((float) $product['old_price']) ?></span>
                                 <?php endif; ?>
                             </div>
-                            <div class="rating-mini">★★★★★ <span>(<?= (int) $product['reviews'] ?>)</span></div>
+
+                            <?php
+                            $ratingValue = rand(35, 50) / 10;
+                            $fullStars = floor($ratingValue);
+                            $emptyStars = 5 - $fullStars;
+                            ?>
+                            <div class="product-rating">
+                                <span class="stars"><?= str_repeat('★', $fullStars) . str_repeat('☆', $emptyStars) ?></span>
+                                <span class="rating-number">(<?= number_format($ratingValue, 1) ?>)</span>
+                            </div>
+
                             <form action="<?= url('add-to-cart.php') ?>" method="post">
                                 <input type="hidden" name="product_id" value="<?= (int) $product['id'] ?>">
                                 <input type="hidden" name="qty" value="1">
@@ -168,10 +189,32 @@ include __DIR__ . '/includes/header.php';
                                 <img src="<?= url($product['image_path']) ?>" alt="<?= e($product['name']) ?>">
                                 <?php if ((int) $product['is_featured'] === 1): ?><span class="badge-ribbon">Best Seller</span><?php endif; ?>
                             </a>
+
+                            <?php
+                            $wishlist = $_SESSION['wishlist'] ?? [];
+                            $isLoved = in_array((int) $product['id'], $wishlist, true);
+                            ?>
+                            <a href="<?= url('wishlist-toggle.php?id=' . (int) $product['id']) ?>"
+                               class="wishlist-btn <?= $isLoved ? 'active' : '' ?>"
+                               title="Yêu thích">
+                                ♥
+                            </a>
+
                             <div class="product-meta">
                                 <div class="studio"><?= e($product['studio']) ?></div>
                                 <h3><a href="<?= url('product-detail.php?id=' . $product['id']) ?>"><?= e($product['name']) ?></a></h3>
                                 <div class="price-line"><strong><?= format_currency((float) $product['price']) ?></strong></div>
+
+                                <?php
+                                $ratingValue = rand(35, 50) / 10;
+                                $fullStars = floor($ratingValue);
+                                $emptyStars = 5 - $fullStars;
+                                ?>
+                                <div class="product-rating">
+                                    <span class="stars"><?= str_repeat('★', $fullStars) . str_repeat('☆', $emptyStars) ?></span>
+                                    <span class="rating-number">(<?= number_format($ratingValue, 1) ?>)</span>
+                                </div>
+
                                 <div class="card-actions stretch">
                                     <a class="outline-btn small" href="<?= url('product-detail.php?id=' . $product['id']) ?>">Chi tiết</a>
                                     <a class="small-btn" href="<?= url('product-detail.php?id=' . $product['id']) ?>" style="background:#111;">Mua ngay</a>
@@ -180,7 +223,7 @@ include __DIR__ . '/includes/header.php';
                                     <input type="hidden" name="product_id" value="<?= (int) $product['id'] ?>">
                                     <input type="hidden" name="qty" value="1">
                                     <button class="small-btn" type="submit" style="width:100%;">🛒 Thêm vào giỏ hàng</button>
-                                    </form>
+                                </form>
                             </div>
                         </article>
                     <?php endforeach; ?>

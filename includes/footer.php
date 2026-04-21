@@ -42,8 +42,77 @@
             </div>
         </div>
     </div>
+
     <div class="copyright">© Copyright <?= $year ?>. All rights reserved</div>
 </footer>
+
+<!-- Floating Contact Button -->
+<div class="floating-contact">
+    <a href="https://www.facebook.com/nguyen.vinh.562690" target="_blank" class="contact-circle contact-support" title="Liên hệ">
+        💬
+    </a>
+    <a href="https://m.me/nguyen.vinh.562690" target="_blank" class="contact-circle contact-messenger" title="Messenger">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M12 2C6.477 2 2 6.145 2 11.259c0 2.914 1.453 5.514 3.724 7.214V22l3.406-1.87c.907.252 1.869.388 2.87.388 5.523 0 10-4.145 10-9.259S17.523 2 12 2zm1.062 12.445-2.544-2.713-4.963 2.713 5.459-5.797 2.468 2.713 5.039-2.713-5.459 5.797z"/>
+        </svg>
+    </a>
+</div>
+
+<style>
+.floating-contact {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-circle {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.contact-circle:hover {
+    transform: scale(1.08);
+    opacity: 0.95;
+}
+
+.contact-support {
+    background: #2f2f2f;
+    color: #fff;
+    font-size: 24px;
+}
+
+.contact-messenger {
+    background: #1877f2;
+}
+
+.contact-messenger svg {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .floating-contact {
+        right: 12px;
+        bottom: 12px;
+    }
+
+    .contact-circle {
+        width: 52px;
+        height: 52px;
+    }
+}
+</style>
 
 <script src="<?= url('assets/js/main.js') ?>"></script>
 
@@ -125,6 +194,20 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
-
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const flashToast = document.getElementById('flashToast');
+    if (flashToast) {
+        setTimeout(() => {
+            flashToast.style.transition = '0.3s ease';
+            flashToast.style.opacity = '0';
+            flashToast.style.transform = 'translateY(-10px)';
+            setTimeout(() => {
+                flashToast.style.display = 'none';
+            }, 300);
+        }, 2500);
+    }
+});
+</script>
 </body>
 </html>

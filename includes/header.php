@@ -35,7 +35,6 @@ $currentPath = basename(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH));
 
         <div class="nav-actions">
 
-            <!-- SEARCH + SUGGEST -->
             <div class="search-suggest-wrap" style="position:relative;">
                 <form action="<?= url('index.php') ?>" method="get" class="search-form" autocomplete="off">
                     <input
@@ -48,7 +47,6 @@ $currentPath = basename(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH));
                     <button type="submit" aria-label="Tìm kiếm">🔎</button>
                 </form>
 
-                <!-- BOX GỢI Ý -->
                 <div id="searchSuggestions" style="
                     position:absolute;
                     top:110%;
@@ -61,19 +59,20 @@ $currentPath = basename(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH));
                 "></div>
             </div>
 
-            <!-- CART -->
-            <a class="icon-link" href="<?= url('cart.php') ?>">
-                🛒 <span class="counter"><?= cart_count() ?></span>
+            <a class="icon-link cart-link" href="<?= url('cart.php') ?>">
+                <span class="cart-icon">🛒</span>
+                <?php if (cart_count() > 0): ?>
+                    <span class="cart-counter"><?= cart_count() ?></span>
+                <?php endif; ?>
             </a>
 
-            <!-- USER -->
             <?php if ($user): ?>
-                <div class="user-chip">
-                    <div>
+                <div class="header-user-box">
+                    <div class="header-user-info">
                         <strong><?= e($user['full_name']) ?></strong>
-                        <small><?= is_admin() ? 'Admin' : 'Customer' ?></small>
+                        <span><?= is_admin() ? 'Admin' : 'Customer' ?></span>
                     </div>
-                    <a href="<?= url('logout.php') ?>">Logout</a>
+                    <a class="header-logout-btn" href="<?= url('logout.php') ?>">Logout</a>
                 </div>
             <?php else: ?>
                 <a class="login-link" href="<?= url('login.php') ?>">Login</a>
@@ -85,9 +84,8 @@ $currentPath = basename(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH));
 </header>
 
 <?php if ($flash): ?>
-    <div class="container">
-        <div class="flash-message <?= e($flash['type']) ?>">
-            <?= e($flash['message']) ?>
-        </div>
+    <div class="flash-toast <?= e($flash['type']) ?>" id="flashToast">
+        <span><?= e($flash['message']) ?></span>
+        <button type="button" class="flash-close" onclick="document.getElementById('flashToast').style.display='none'">×</button>
     </div>
 <?php endif; ?>
