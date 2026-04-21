@@ -42,7 +42,7 @@ include __DIR__ . '/includes/header.php';
 <main class="auth-page">
     <div class="container auth-grid">
         <div class="auth-visual large-visual">
-            <img src="<?= url('assets/images/hero/login-visual.jpg') ?>" alt="Login visual">
+            <img src="<?= url('assets/images/products/login-visual.jpg') ?>" alt="Login visual">
         </div>
         <div class="auth-card">
             <h1>Log in to Lzon Poke</h1>
