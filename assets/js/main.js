@@ -172,16 +172,22 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(function (r) { return r.json(); })
         .then(function (res) {
-            if (btn) { btn.textContent = originalText; btn.disabled = false; }
-            if (!res.success) { showToast('Có lỗi xảy ra!', false); return; }
+    if (btn) { btn.textContent = originalText; btn.disabled = false; }
+    if (!res.success) { showToast('Có lỗi xảy ra!', false); return; }
 
-            var cartEl = document.querySelector('.icon-link .counter');
-            if (cartEl) {
-                cartEl.textContent = res.cart_count;
-                cartEl.style.transition = 'transform .15s';
-                cartEl.style.transform  = 'scale(1.7)';
-                setTimeout(function () { cartEl.style.transform = 'scale(1)'; }, 200);
-            }
+    var cartEl = document.querySelector('.cart-counter');
+    var cartLink = document.querySelector('.cart-link');
+    if (!cartEl && cartLink && res.cart_count > 0) {
+        cartEl = document.createElement('span');
+        cartEl.className = 'cart-counter';
+        cartLink.appendChild(cartEl);
+    }
+    if (cartEl) {
+    cartEl.textContent = res.cart_count;
+    cartEl.style.transition = 'transform .15s';
+    cartEl.style.transform  = 'scale(1.7)';
+    setTimeout(function () { cartEl.style.transform = 'scale(1)'; }, 200);
+}
 
             showToast('✓ Đã thêm "' + res.name + '" vào giỏ!', true);
         })
