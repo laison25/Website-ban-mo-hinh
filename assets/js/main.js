@@ -185,10 +185,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
             showToast('✓ Đã thêm "' + res.name + '" vào giỏ!', true);
         })
-        .catch(function () {
-            if (btn) { btn.textContent = originalText; btn.disabled = false; }
-            form.submit();
-        });
+.catch(function (err) {
+    console.error('Cart error:', err);
+    if (btn) { btn.textContent = originalText; btn.disabled = false; }
+    showToast('Lỗi kết nối, thử lại!', false);
+});
     });
 
 });
