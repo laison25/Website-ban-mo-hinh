@@ -133,4 +133,62 @@ document.addEventListener('DOMContentLoaded', function () {
         render();
         setInterval(render, 1000);
     }
+// ── Add-to-cart AJAX ─────────────────────────────────
+    var toastBox = document.createElement('div');
+    toastBox.style.cssText = 'position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:10px;pointer-events:none;';
+    document.body.appendChild(toastBox);
+
+    function showToast(msg, ok) {
+        var t = document.createElement('div');
+        t.textContent = msg;
+        t.style.cssText = 'padding:14px 20px;border-radius:12px;color:#fff;font-size:14px;font-weight:600;box-shadow:0 4px 18px rgba(0,0,0,.2);opacity:0;transform:translateY(12px);transition:opacity .3s,transform .3s;background:' + (ok ? '#1a6f45' : '#b42318') + ';';
+        toastBox.appendChild(t);
+        requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+                t.style.opacity = '1';
+                t.style.transform = 'translateY(0)';
+            });
+        });
+        setTimeout(function () {
+            t.style.opacity = '0';
+            t.style.transform = 'translateY(12px)';
+            setTimeout(function () { t.remove(); }, 350);
+        }, 2500);
+    }
+
+    document.addEventListener('submit', function (e) {
+        var form = e.target;
+        if (!form || !form.action || form.action.indexOf('add-to-cart') === -1) return;
+        e.preventDefault();
+
+        var btn = form.querySelector('button[type="submit"]');
+        var originalText = btn ? btn.textContent : '';
+        if (btn) { btn.textContent = '...'; btn.disabled = true; }
+
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        })
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+            if (btn) { btn.textContent = originalText; btn.disabled = false; }
+            if (!res.success) { showToast('Có lỗi xảy ra!', false); return; }
+
+            var cartEl = document.querySelector('.icon-link .counter');
+            if (cartEl) {
+                cartEl.textContent = res.cart_count;
+                cartEl.style.transition = 'transform .15s';
+                cartEl.style.transform  = 'scale(1.7)';
+                setTimeout(function () { cartEl.style.transform = 'scale(1)'; }, 200);
+            }
+
+            showToast('✓ Đã thêm "' + res.name + '" vào giỏ!', true);
+        })
+        .catch(function () {
+            if (btn) { btn.textContent = originalText; btn.disabled = false; }
+            form.submit();
+        });
+    });
+
 });

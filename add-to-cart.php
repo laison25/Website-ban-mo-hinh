@@ -21,7 +21,7 @@ $_SESSION['cart'][$productId] = $newQty;
 if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
     $count = array_sum($_SESSION['cart'] ?? []);
     header('Content-Type: application/json');
-    echo json_encode(['success' => true, 'cart_count' => $count]);
+    echo json_encode(['success' => true, 'cart_count' => $count, 'name' => $product['name']]);
     exit;
 }
 
