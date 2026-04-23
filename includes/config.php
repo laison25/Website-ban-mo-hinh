@@ -7,9 +7,11 @@ $isLocal = in_array($serverName, ['localhost', '127.0.0.1']);
 
 // APP_URL
 if ($isLocal) {
-    define('APP_URL', 'http://localhost/website-ban-mo-hinh-php-v3/');
+    $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    define('APP_URL', $scheme . '://' . $host . '/website-ban-mo-hinh-php-v3/');
 } else {
-    define('APP_URL', 'http://modelshop-laison.rf.gd/');
+    define('APP_URL', 'https://modelshop-laison.rf.gd/');
 }
 
 // DB Config
@@ -38,3 +40,9 @@ const QR_TEMPLATE     = 'compact2';
 // Khi có Client ID/Secret thật, đổi false và điền bên dưới.
 const SOCIAL_LOGIN_DEMO_MODE = true;
 
+const GOOGLE_CLIENT_ID = '';
+const GOOGLE_CLIENT_SECRET = '';
+const GOOGLE_REDIRECT_URI = '';
+
+const FACEBOOK_APP_ID     = '';
+const FACEBOOK_APP_SECRET = '';

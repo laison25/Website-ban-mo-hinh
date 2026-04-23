@@ -102,6 +102,67 @@ function order_status_label(string $status): string {
     ][$status] ?? $status;
 }
 
+function available_coupons(): array {
+    return [
+        'LZON10' => [
+            'label' => 'Giảm 10% đơn hàng',
+            'type' => 'percent',
+            'value' => 10,
+            'max_discount' => 500000,
+        ],
+        'FREESHIP' => [
+            'label' => 'Ưu đãi phí vận chuyển',
+            'type' => 'fixed',
+            'value' => 150000,
+            'max_discount' => 150000,
+        ],
+        'FIGURE500' => [
+            'label' => 'Giảm 500.000đ cho đơn từ 5.000.000đ',
+            'type' => 'fixed',
+            'value' => 500000,
+            'min_total' => 5000000,
+            'max_discount' => 500000,
+        ],
+    ];
+}
+
+function normalize_coupon_code(string $code): string {
+    return strtoupper(trim($code));
+}
+
+function get_applied_coupon(): ?array {
+    $code = normalize_coupon_code($_SESSION['coupon_code'] ?? '');
+    $coupons = available_coupons();
+
+    if ($code === '' || !isset($coupons[$code])) {
+        return null;
+    }
+
+    return ['code' => $code] + $coupons[$code];
+}
+
+function calculate_coupon_discount(float $subtotal, ?array $coupon): float {
+    if (!$coupon || $subtotal <= 0) {
+        return 0;
+    }
+
+    if (!empty($coupon['min_total']) && $subtotal < (float) $coupon['min_total']) {
+        return 0;
+    }
+
+    if (($coupon['type'] ?? '') === 'percent') {
+        $discount = $subtotal * ((float) $coupon['value'] / 100);
+    } else {
+        $discount = (float) ($coupon['value'] ?? 0);
+    }
+
+    if (isset($coupon['max_discount'])) {
+        $discount = min($discount, (float) $coupon['max_discount']);
+    }
+
+    return min($subtotal, max(0, $discount));
+}
+
 function cart_count(): int {
     return array_sum($_SESSION['cart'] ?? []);
 }
@@ -205,7 +266,7 @@ function get_wishlist_products(mysqli $conn): array {
     return $products;
 }
 
-function fetch_products(mysqli $conn, string $keyword = '', string $category = ''): array {
+function fetch_products(mysqli $conn, string $keyword = '', string $category = '', string $sort = 'featured', float $minPrice = 0, float $maxPrice = 0): array {
     $conditions = [];
     $params = [];
     $types = '';
@@ -223,11 +284,40 @@ function fetch_products(mysqli $conn, string $keyword = '', string $category = '
         $types .= 's';
     }
 
+    if ($minPrice > 0) {
+        $conditions[] = 'price >= ?';
+        $params[] = $minPrice;
+        $types .= 'd';
+    }
+
+    if ($maxPrice > 0) {
+        $conditions[] = 'price <= ?';
+        $params[] = $maxPrice;
+        $types .= 'd';
+    }
+
     $sql = 'SELECT * FROM products';
     if ($conditions) {
         $sql .= ' WHERE ' . implode(' AND ', $conditions);
     }
-    $sql .= ' ORDER BY is_featured DESC, id DESC';
+    switch ($sort) {
+        case 'price_asc':
+            $orderBy = 'price ASC, id DESC';
+            break;
+        case 'price_desc':
+            $orderBy = 'price DESC, id DESC';
+            break;
+        case 'name_asc':
+            $orderBy = 'name ASC';
+            break;
+        case 'newest':
+            $orderBy = 'id DESC';
+            break;
+        default:
+            $orderBy = 'is_featured DESC, id DESC';
+            break;
+    }
+    $sql .= ' ORDER BY ' . $orderBy;
 
     if ($types === '') {
         $result = $conn->query($sql);

@@ -24,6 +24,7 @@
             <p><a href="<?= url('wishlist.php') ?>">Sản phẩm yêu thích</a></p>
             <p><a href="<?= url('account-settings.php') ?>">Cài đặt tài khoản</a></p>
             <p><a href="<?= url('checkout.php') ?>">Thanh toán</a></p>
+            <p><a href="<?= url('track-order.php') ?>">Tra cứu đơn hàng</a></p>
             <p><a href="<?= url('order-history.php') ?>">Lịch sử đơn hàng</a></p>
         </div>
         <div>

@@ -27,6 +27,15 @@ if (!isset($providers[$provider])) {
 }
 
 $providerConfig = $providers[$provider];
+$redirectUri = url('oauth_callback.php');
+
+if ($provider === 'google' && defined('GOOGLE_REDIRECT_URI') && GOOGLE_REDIRECT_URI !== '') {
+    $redirectUri = GOOGLE_REDIRECT_URI;
+}
+
+if ($provider === 'facebook' && defined('FACEBOOK_REDIRECT_URI') && FACEBOOK_REDIRECT_URI !== '') {
+    $redirectUri = FACEBOOK_REDIRECT_URI;
+}
 
 if (SOCIAL_LOGIN_DEMO_MODE || $providerConfig['client_id'] === '') {
     redirect_to('oauth_callback.php?provider=' . urlencode($provider)
@@ -40,7 +49,7 @@ $_SESSION['oauth_provider'] = $provider;
 
 $query = http_build_query([
     'client_id' => $providerConfig['client_id'],
-    'redirect_uri' => url('oauth_callback.php'),
+    'redirect_uri' => $redirectUri,
     'response_type' => 'code',
     'scope' => $providerConfig['scope'],
     'state' => $state,

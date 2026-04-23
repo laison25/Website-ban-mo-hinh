@@ -9,7 +9,7 @@ $currentPath = basename(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH));
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= e($pageTitle ?? APP_NAME) ?></title>
-    <link rel="stylesheet" href="assets/css/style.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="<?= url('assets/css/style.css') ?>?v=<?= filemtime(__DIR__ . '/../assets/css/style.css') ?>">
 </head>
 <body>
 <div class="topbar">Miễn phí giao hàng cho đơn từ 5.000.000đ <span>Nhận tư vấn sưu tầm ngay</span></div>
@@ -24,6 +24,7 @@ $currentPath = basename(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH));
             <a href="<?= url('index.php#products') ?>">Sản phẩm</a>
             <a href="<?= url('cart.php') ?>" class="<?= $currentPath === 'cart.php' ? 'active' : '' ?>">Giỏ hàng</a>
             <a href="<?= url('wishlist.php') ?>" class="<?= $currentPath === 'wishlist.php' ? 'active' : '' ?>">Yêu thích</a>
+            <a href="<?= url('track-order.php') ?>" class="<?= $currentPath === 'track-order.php' ? 'active' : '' ?>">Tra cứu</a>
 
             <?php if ($user && !is_admin()): ?>
                 <a href="<?= url('order-history.php') ?>" class="<?= $currentPath === 'order-history.php' ? 'active' : '' ?>">Đơn hàng</a>

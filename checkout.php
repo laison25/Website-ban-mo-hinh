@@ -10,7 +10,10 @@ if (empty($items)) {
     redirect_to('cart.php');
 }
 
-$total = cart_total($conn);
+$subtotal = cart_total($conn);
+$coupon = get_applied_coupon();
+$discount = calculate_coupon_discount($subtotal, $coupon);
+$total = max(0, $subtotal - $discount);
 $user = current_user();
 $error = '';
 
@@ -83,8 +86,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $status = $paymentMethods[$form['payment_method']]['status'];
             $userId = (int) $user['id'];
+            $orderNote = $form['note'];
+            if ($coupon && $discount > 0) {
+                $orderNote = trim($orderNote . "\nMã giảm giá: " . $coupon['code'] . ' (-' . format_currency($discount) . ')');
+            }
+
             $stmt = $conn->prepare('INSERT INTO orders (user_id, customer_name, customer_email, phone, address, note, payment_method, status, total_amount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
-            $stmt->bind_param('isssssssd', $userId, $form['customer_name'], $form['customer_email'], $form['phone'], $form['address'], $form['note'], $form['payment_method'], $status, $total);
+            $stmt->bind_param('isssssssd', $userId, $form['customer_name'], $form['customer_email'], $form['phone'], $form['address'], $orderNote, $form['payment_method'], $status, $total);
             $stmt->execute();
             $orderId = $stmt->insert_id;
             $stmt->close();
@@ -107,6 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stockStmt->close();
             $conn->commit();
             unset($_SESSION['cart']);
+            unset($_SESSION['coupon_code']);
 
             if ($status === 'awaiting_payment') {
                 set_flash('success', 'Đơn hàng đã được tạo. Vui lòng hoàn tất thanh toán.');
@@ -246,7 +255,10 @@ include __DIR__ . '/includes/header.php';
                     </div>
                 <?php endforeach; ?>
             </div>
-            <div class="summary-line"><span>Tạm tính</span><strong><?= format_currency($total) ?></strong></div>
+            <div class="summary-line"><span>Tạm tính</span><strong><?= format_currency($subtotal) ?></strong></div>
+            <?php if ($discount > 0): ?>
+                <div class="summary-line discount-line"><span>Giảm giá <?= e($coupon['code'] ?? '') ?></span><strong>-<?= format_currency($discount) ?></strong></div>
+            <?php endif; ?>
             <div class="summary-line"><span>Vận chuyển</span><strong>Miễn phí</strong></div>
             <div class="summary-line total"><span>Tổng cộng</span><strong><?= format_currency($total) ?></strong></div>
             <div class="checkout-secure-note">🔒 Thông tin đơn hàng được xử lý an toàn trong hệ thống demo.</div>
