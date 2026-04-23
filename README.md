@@ -2,8 +2,8 @@
 
 ## Thông Tin Nhóm
 - **Lại Nam Sơn** - Nhóm trưởng
-- **Phương** - Thành viên
-- **Vinh** - Thành viên
+- **Nguyễn Văn Phương** - Thành viên
+- **Nguyễn Thành Vinh** - Thành viên
 
 ## Giới Thiệu
 Website Bán Mô Hình là dự án xây dựng hệ thống bán hàng trực tuyến cho các sản phẩm mô hình, figure, resin statue và các bộ sưu tập liên quan. Website hỗ trợ khách hàng xem sản phẩm, tìm kiếm, thêm vào giỏ hàng, lưu sản phẩm yêu thích, đặt hàng và theo dõi lịch sử đơn hàng.
@@ -120,14 +120,15 @@ File database mẫu:
 - **Khách hàng:** xem sản phẩm, tìm kiếm, yêu thích, thêm giỏ hàng, đặt hàng và xem lịch sử đơn.
 - **Quản trị viên:** quản lý sản phẩm, đơn hàng, ảnh sản phẩm và dữ liệu hệ thống.
 
-## Phân Công Sơ Bộ
+## Phân Công 
 - **Lại Nam Sơn:** phụ trách chính phần README, tài liệu, thiết kế giao diện, triển khai PHP/MySQL, trang chủ, sản phẩm, tài khoản, thanh toán và hoàn thiện giao diện.
 - **Phương:** hỗ trợ xây dựng ý tưởng, nội dung dự án và phối hợp hoàn thiện giao diện.
 - **Vinh:** hỗ trợ phân tích luồng giỏ hàng, đặt hàng, thanh toán và quản lý đơn hàng.
 
 ## Tài Liệu Liên Quan
+
 - [SRS chức năng Đăng nhập hệ thống](./SRS_dang_nhap_website_ban_mo_hinh.md)
-- [Báo cáo tiến độ ngày 03/04/2026](./reports/REPORT_03042026.md)
+- [Báo cáo tiến độ ngày 23/04/2026](./reports/REPORT_03042026.md)
 
 ## Ghi Chú
 Dự án đã hoàn thiện các chức năng cơ bản của một website bán mô hình: sản phẩm, tài khoản, giỏ hàng, yêu thích, checkout nhiều phương thức, thanh toán demo, lịch sử đơn hàng, chat hỗ trợ và trang quản trị. Một số phần như thanh toán ví điện tử/thẻ và đăng nhập social đang ở mức mô phỏng/demo để phù hợp với môi trường đồ án.
