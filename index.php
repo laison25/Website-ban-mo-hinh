@@ -32,10 +32,15 @@ include __DIR__ . '/includes/header.php';
                 <img src="<?= url('assets/images/products/main-banner.jpg') ?>" alt="Shop banner">
                 <div class="shop-top-banner__overlay"></div>
                 <div class="shop-top-banner__content">
-                    <span class="shop-top-banner__eyebrow">New arrivals</span>
-                    <h1>Banner Shop Của Bạn</h1>
-                    <p>Khám phá các mẫu figure mới, ưu đãi nổi bật và bộ sưu tập đang được săn đón.</p>
-                    <span class="shop-top-banner__cta">Mua ngay</span>
+                    <span class="shop-top-banner__eyebrow">Premium Figure Store</span>
+                    <h1>Mô hình sưu tầm chính hãng</h1>
+                    <p>Tuyển chọn resin, scale figure và mini figure nổi bật từ các studio được cộng đồng yêu thích.</p>
+                    <span class="shop-top-banner__cta">Khám phá bộ sưu tập</span>
+                    <div class="hero-trust-row" aria-label="Cam kết cửa hàng">
+                        <span>Ảnh thật rõ nét</span>
+                        <span>Đóng gói an toàn</span>
+                        <span>Hỗ trợ 24/7</span>
+                    </div>
                 </div>
             </a>
         </div>
@@ -44,7 +49,7 @@ include __DIR__ . '/includes/header.php';
     <section class="home-shell section-space">
         <div class="container home-layout">
             <aside class="category-sidebar">
-                <h3>Danh mục</h3>
+                <h3>Danh mục sản phẩm</h3>
                 <a class="category-link <?= $category === '' ? 'active' : '' ?>" href="<?= url('index.php') ?>">Tất cả sản phẩm</a>
                 <?php foreach ($categories as $cat): ?>
                     <a class="category-link <?= $category === $cat ? 'active' : '' ?>" href="<?= url('index.php?category=' . urlencode($cat)) ?>"><?= e($cat) ?></a>
@@ -65,7 +70,7 @@ include __DIR__ . '/includes/header.php';
                                     <img src="<?= url($item['image_path']) ?>" alt="<?= e($item['name']) ?>">
                                     <div class="hero-slide-shade"></div>
                                     <div class="hero-slide-content">
-                                        <span class="hero-eyebrow">Featured Collection</span>
+                                        <span class="hero-eyebrow">Bộ sưu tập nổi bật</span>
                                         <span class="hero-tag"><?= e($item['category']) ?></span>
                                         <h1><?= e($item['name']) ?></h1>
                                         <p><?= e($item['studio']) ?> • <?= format_currency((float) $item['price']) ?></p>
@@ -103,16 +108,17 @@ include __DIR__ . '/includes/header.php';
 
     <section class="section-space sale-section">
         <div class="container">
-            <div class="section-label">Today's</div>
+            <div class="section-label">Ưu đãi hôm nay</div>
             <div class="section-head countdown-head">
                 <div>
-                    <h2>Flash Sales</h2>
+                    <h2>Flash Sale Figure</h2>
+                    <p class="muted">Những mẫu đang được quan tâm với giá tốt trong thời gian giới hạn.</p>
                 </div>
                 <div class="countdown-boxes" data-countdown>
-                    <div><small>Days</small><strong data-unit="days">03</strong></div>
-                    <div><small>Hours</small><strong data-unit="hours">23</strong></div>
-                    <div><small>Minutes</small><strong data-unit="minutes">19</strong></div>
-                    <div><small>Seconds</small><strong data-unit="seconds">56</strong></div>
+                    <div><small>Ngày</small><strong data-unit="days">03</strong></div>
+                    <div><small>Giờ</small><strong data-unit="hours">23</strong></div>
+                    <div><small>Phút</small><strong data-unit="minutes">19</strong></div>
+                    <div><small>Giây</small><strong data-unit="seconds">56</strong></div>
                 </div>
             </div>
             <div class="product-grid">
@@ -167,13 +173,15 @@ include __DIR__ . '/includes/header.php';
 
     <section class="section-space" id="products">
         <div class="container">
-            <div class="section-label">This Month</div>
+            <div class="section-label">Bộ sưu tập</div>
             <div class="section-head">
                 <div>
-                    <h2>Best Selling Products</h2>
-                    <p class="muted"><?= $keyword !== '' ? 'Kết quả tìm kiếm cho: ' . e($keyword) : 'Danh sách sản phẩm lấy trực tiếp từ MySQL và hiển thị theo phong cách Figma.' ?></p>
+                    <h2>Sản phẩm đang bán</h2>
+                    <p class="muted"><?= $keyword !== '' ? 'Kết quả tìm kiếm cho: ' . e($keyword) : 'Duyệt các mẫu figure theo studio, kích thước, giá và tình trạng nổi bật.' ?></p>
                 </div>
-                <a class="outline-btn" href="<?= url('admin/products.php') ?>">View Admin</a>
+                <?php if (is_admin()): ?>
+                    <a class="outline-btn" href="<?= url('admin/products.php') ?>">Quản lý sản phẩm</a>
+                <?php endif; ?>
             </div>
             <?php if (empty($products)): ?>
                 <div class="empty-box">Không tìm thấy sản phẩm phù hợp.</div>
@@ -230,9 +238,9 @@ include __DIR__ . '/includes/header.php';
 
     <section class="section-space-sm">
         <div class="container service-grid">
-            <div class="service-item"><div class="service-icon">🚚</div><h4>FREE AND FAST DELIVERY</h4><p>Free delivery for orders above 5M</p></div>
-            <div class="service-item"><div class="service-icon">🎧</div><h4>24/7 CUSTOMER SERVICE</h4><p>Friendly 24/7 customer support</p></div>
-            <div class="service-item"><div class="service-icon">💰</div><h4>MONEY BACK GUARANTEE</h4><p>We return money within 30 days</p></div>
+            <div class="service-item"><div class="service-icon">🚚</div><h4>Giao hàng an toàn</h4><p>Đóng gói chống sốc, theo dõi đơn rõ ràng.</p></div>
+            <div class="service-item"><div class="service-icon">🎧</div><h4>Tư vấn sưu tầm</h4><p>Hỗ trợ chọn mẫu theo ngân sách và không gian trưng bày.</p></div>
+            <div class="service-item"><div class="service-icon">💰</div><h4>Minh bạch giá</h4><p>Hiển thị giá, tồn kho và thông tin sản phẩm rõ ràng.</p></div>
         </div>
     </section>
 </main>

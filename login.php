@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($loginValue === '' || $password === '') {
         $error = 'Vui lòng nhập đầy đủ tài khoản và mật khẩu.';
     } else {
+        global $conn;
         $stmt = $conn->prepare('SELECT id, full_name, username, email, password_hash, role, status FROM users WHERE email = ? OR username = ? LIMIT 1');
         $stmt->bind_param('ss', $loginValue, $loginValue);
         $stmt->execute();
@@ -49,8 +50,8 @@ include __DIR__ . '/includes/header.php';
         </div>
 
         <div class="auth-card">
-            <h1>Log in to Lzon Poke</h1>
-            <p>Enter your details below</p>
+            <h1>Đăng nhập Lzon Poke</h1>
+            <p>Quản lý giỏ hàng, yêu thích và lịch sử đơn hàng của bạn.</p>
 
             <?php if ($error): ?>
                 <div class="flash-message error"><?= e($error) ?></div>
@@ -58,32 +59,31 @@ include __DIR__ . '/includes/header.php';
 
             <form method="post" class="form-card auth-form">
                 <div class="form-group">
-                    <input type="text" name="login" value="<?= e($loginValue) ?>" placeholder="Email or Username">
+                    <input type="text" name="login" value="<?= e($loginValue) ?>" placeholder="Email hoặc username">
                 </div>
 
                 <div class="form-group">
-                    <input type="password" name="password" placeholder="Password">
+                    <input type="password" name="password" placeholder="Mật khẩu">
                 </div>
 
                 <div class="login-actions-row">
-                    <button class="primary-btn" type="submit">Log In</button>
-                    <a class="text-link" href="<?= url('register.php') ?>">Create account</a>
+                    <button class="primary-btn" type="submit">Đăng nhập</button>
+                    <a class="text-link" href="<?= url('register.php') ?>">Tạo tài khoản</a>
                 </div>
 
                 <div class="demo-box">
                     <strong>Demo:</strong> admin / 123456 &nbsp; | &nbsp; user / 123456
                 </div>
 
-                <div style="margin-top: 18px; display: flex; flex-direction: column; gap: 10px;">
-                    <a href="http://localhost:8000/auth/google/redirect"
-                       class="primary-btn"
-                       style="text-align:center; text-decoration:none; display:block;">
+                <div class="social-login-box">
+                    <div class="social-divider"><span>Hoặc đăng nhập nhanh</span></div>
+                    <a href="<?= url('social-login.php?provider=google') ?>" class="social-login-btn google">
+                        <span>G</span>
                         Đăng nhập bằng Google
                     </a>
 
-                    <a href="http://localhost:8000/auth/facebook/redirect"
-                       class="primary-btn"
-                       style="text-align:center; text-decoration:none; display:block; background:#1877f2;">
+                    <a href="<?= url('social-login.php?provider=facebook') ?>" class="social-login-btn facebook">
+                        <span>f</span>
                         Đăng nhập bằng Facebook
                     </a>
                 </div>

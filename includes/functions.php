@@ -4,7 +4,25 @@ function e(?string $value): string {
 }
 
 function url(string $path = ''): string {
-    return rtrim(APP_URL, '/') . '/' . ltrim($path, '/');
+    $configuredUrl = trim(APP_URL);
+
+    if ($configuredUrl !== '') {
+        return rtrim($configuredUrl, '/') . '/' . ltrim($path, '/');
+    }
+
+    $https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+        || (($_SERVER['SERVER_PORT'] ?? '') === '443');
+    $scheme = $https ? 'https' : 'http';
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    $scriptPath = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '');
+    $segments = array_values(array_filter(explode('/', $scriptPath), 'strlen'));
+    $basePath = '';
+
+    if (!empty($segments) && strpos($segments[0], '.') === false && $segments[0] !== 'admin') {
+        $basePath = '/' . $segments[0];
+    }
+
+    return rtrim($scheme . '://' . $host . $basePath, '/') . '/' . ltrim($path, '/');
 }
 
 function redirect_to(string $path): void {
@@ -60,6 +78,28 @@ function format_datetime(?string $datetime): string {
         return '';
     }
     return date('d/m/Y H:i', strtotime($datetime));
+}
+
+function payment_method_label(string $method): string {
+    return [
+        'COD' => 'Thanh toán khi nhận hàng',
+        'BANK' => 'Chuyển khoản ngân hàng',
+        'QR_CODE' => 'VietQR',
+        'MOMO' => 'Ví điện tử',
+        'CARD' => 'Thẻ ATM / Visa',
+    ][$method] ?? $method;
+}
+
+function order_status_label(string $status): string {
+    return [
+        'pending' => 'Chờ xác nhận',
+        'awaiting_payment' => 'Chờ thanh toán',
+        'paid' => 'Đã thanh toán',
+        'processing' => 'Đang xử lý',
+        'shipping' => 'Đang giao',
+        'completed' => 'Hoàn thành',
+        'cancelled' => 'Đã hủy',
+    ][$status] ?? $status;
 }
 
 function cart_count(): int {
@@ -129,6 +169,40 @@ function get_product(mysqli $conn, int $id): ?array {
     $result = $stmt->get_result()->fetch_assoc();
     $stmt->close();
     return $result ?: null;
+}
+
+function get_current_user_record(mysqli $conn): ?array {
+    $userId = (int) ($_SESSION['user']['id'] ?? 0);
+    if ($userId <= 0) {
+        return null;
+    }
+
+    $stmt = $conn->prepare('SELECT id, full_name, username, email, password_hash, role, status, created_at FROM users WHERE id = ? LIMIT 1');
+    $stmt->bind_param('i', $userId);
+    $stmt->execute();
+    $user = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+
+    return $user ?: null;
+}
+
+function get_wishlist_products(mysqli $conn): array {
+    $wishlist = array_values(array_unique(array_map('intval', $_SESSION['wishlist'] ?? [])));
+    $wishlist = array_values(array_filter($wishlist, fn($id) => $id > 0));
+
+    if (empty($wishlist)) {
+        return [];
+    }
+
+    $placeholders = implode(',', array_fill(0, count($wishlist), '?'));
+    $types = str_repeat('i', count($wishlist));
+    $stmt = $conn->prepare("SELECT * FROM products WHERE id IN ($placeholders) ORDER BY is_featured DESC, id DESC");
+    $stmt->bind_param($types, ...$wishlist);
+    $stmt->execute();
+    $products = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+
+    return $products;
 }
 
 function fetch_products(mysqli $conn, string $keyword = '', string $category = ''): array {

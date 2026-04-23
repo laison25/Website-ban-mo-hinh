@@ -198,4 +198,69 @@ document.addEventListener('DOMContentLoaded', function () {
 });
     });
 
+    document.querySelectorAll('[data-chat-widget]').forEach(function (widget) {
+        var toggle = widget.querySelector('[data-chat-toggle]');
+        var close = widget.querySelector('[data-chat-close]');
+        var form = widget.querySelector('[data-chat-form]');
+        var input = widget.querySelector('[data-chat-input]');
+        var messages = widget.querySelector('[data-chat-messages]');
+
+        function setOpen(open) {
+            widget.classList.toggle('is-open', open);
+            if (toggle) {
+                toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            }
+            if (open && input) {
+                setTimeout(function () { input.focus(); }, 180);
+            }
+        }
+
+        function addMessage(text, type) {
+            if (!messages || !text) return;
+            var bubble = document.createElement('div');
+            bubble.className = 'chat-message ' + type;
+            bubble.textContent = text;
+            messages.appendChild(bubble);
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function botReply() {
+            setTimeout(function () {
+                addMessage('Shop đã nhận tin nhắn. Bạn có thể để lại mẫu cần hỏi, ngân sách và số điện thoại để shop tư vấn nhanh hơn.', 'bot');
+            }, 450);
+        }
+
+        if (toggle) {
+            toggle.addEventListener('click', function () {
+                setOpen(!widget.classList.contains('is-open'));
+            });
+        }
+
+        if (close) {
+            close.addEventListener('click', function () {
+                setOpen(false);
+            });
+        }
+
+        widget.querySelectorAll('[data-chat-suggest]').forEach(function (button) {
+            button.addEventListener('click', function () {
+                var text = button.getAttribute('data-chat-suggest') || '';
+                addMessage(text, 'user');
+                botReply();
+                setOpen(true);
+            });
+        });
+
+        if (form) {
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                var text = input ? input.value.trim() : '';
+                if (!text) return;
+                addMessage(text, 'user');
+                if (input) input.value = '';
+                botReply();
+            });
+        }
+    });
+
 });

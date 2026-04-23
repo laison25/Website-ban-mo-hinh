@@ -26,7 +26,7 @@ include __DIR__ . '/includes/header.php';
                                 <p>Ngày đặt: <?= e(format_datetime($order['created_at'])) ?></p>
                             </div>
                             <div class="order-status-group">
-                                <span class="status-pill"><?= e($order['status']) ?></span>
+                                <span class="status-pill"><?= e(order_status_label($order['status'])) ?></span>
                                 <strong><?= format_currency((float) $order['total_amount']) ?></strong>
                             </div>
                         </div>
@@ -34,7 +34,7 @@ include __DIR__ . '/includes/header.php';
                             <div><strong>Người nhận:</strong> <?= e($order['customer_name']) ?></div>
                             <div><strong>Email:</strong> <?= e($order['customer_email']) ?></div>
                             <div><strong>SĐT:</strong> <?= e($order['phone']) ?></div>
-                            <div><strong>Thanh toán:</strong> <?= e($order['payment_method']) ?></div>
+                            <div><strong>Thanh toán:</strong> <?= e(payment_method_label($order['payment_method'])) ?></div>
                         </div>
                         <div class="order-items-box">
                             <?php foreach ($order['items'] as $item): ?>

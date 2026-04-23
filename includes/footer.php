@@ -3,116 +3,86 @@
     <div class="container footer-grid">
         <div>
             <h4>Lzon Poke</h4>
-            <p>Subscribe</p>
-            <p>Get 10% off your first order</p>
+            <p>Figure store dành cho người sưu tầm Pokemon, anime và resin statue.</p>
+            <p>Nhận tin mẫu mới và ưu đãi sớm.</p>
             <div class="footer-subscribe">
-                <input type="text" placeholder="Enter your email">
+                <input type="text" placeholder="Email của bạn">
                 <button type="button">➜</button>
             </div>
         </div>
         <div>
-            <h4>Support</h4>
-            <p>11 Bis Kyson, District 1</p>
-            <p>Ho Chi Minh City</p>
+            <h4>Hỗ trợ</h4>
+            <p>11 Bis Kỳ Sơn, Quận 1</p>
+            <p>TP. Hồ Chí Minh</p>
             <p>LzonPoke@gmail.com</p>
             <p>+84 8888-8888-9999</p>
         </div>
         <div>
-            <h4>Account</h4>
-            <p><a href="<?= url('login.php') ?>">Login / Register</a></p>
-            <p><a href="<?= url('cart.php') ?>">Cart</a></p>
-            <p><a href="<?= url('checkout.php') ?>">Checkout</a></p>
-            <p><a href="<?= url('order-history.php') ?>">My Orders</a></p>
+            <h4>Tài khoản</h4>
+            <p><a href="<?= url('login.php') ?>">Đăng nhập / Đăng ký</a></p>
+            <p><a href="<?= url('cart.php') ?>">Giỏ hàng</a></p>
+            <p><a href="<?= url('wishlist.php') ?>">Sản phẩm yêu thích</a></p>
+            <p><a href="<?= url('account-settings.php') ?>">Cài đặt tài khoản</a></p>
+            <p><a href="<?= url('checkout.php') ?>">Thanh toán</a></p>
+            <p><a href="<?= url('order-history.php') ?>">Lịch sử đơn hàng</a></p>
         </div>
         <div>
-            <h4>Quick Link</h4>
-            <p><a href="<?= url('index.php#products') ?>">Shop</a></p>
-            <p><a href="<?= url('product-detail.php?id=1') ?>">Product Detail</a></p>
-            <p><a href="<?= url('admin/index.php') ?>">Admin</a></p>
+            <h4>Liên kết nhanh</h4>
+            <p><a href="<?= url('index.php#products') ?>">Cửa hàng</a></p>
+            <p><a href="<?= url('product-detail.php?id=1') ?>">Chi tiết sản phẩm</a></p>
+            <p><a href="<?= url('admin/index.php') ?>">Trang quản trị</a></p>
         </div>
         <div>
-            <h4>Download App</h4>
-            <p>Demo UI inspired by your Figma layout</p>
+            <h4>Theo dõi shop</h4>
+            <p>Cập nhật pre-order, restock và các mẫu resin mới.</p>
             <div class="download-badges">
                 <div class="qr-box">QR</div>
                 <div class="store-links">
-                    <span>Google Play</span>
-                    <span>App Store</span>
+                    <span>Facebook</span>
+                    <span>Messenger</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="copyright">© Copyright <?= $year ?>. All rights reserved</div>
+    <div class="copyright">© <?= $year ?> Lzon Poke. All rights reserved.</div>
 </footer>
 
-<!-- Floating Contact Button -->
-<div class="floating-contact">
-    <a href="https://www.facebook.com/nguyen.vinh.562690" target="_blank" class="contact-circle contact-support" title="Liên hệ">
-        💬
-    </a>
-    <a href="https://m.me/nguyen.vinh.562690" target="_blank" class="contact-circle contact-messenger" title="Messenger">
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true">
-            <path d="M12 2C6.477 2 2 6.145 2 11.259c0 2.914 1.453 5.514 3.724 7.214V22l3.406-1.87c.907.252 1.869.388 2.87.388 5.523 0 10-4.145 10-9.259S17.523 2 12 2zm1.062 12.445-2.544-2.713-4.963 2.713 5.459-5.797 2.468 2.713 5.039-2.713-5.459 5.797z"/>
-        </svg>
-    </a>
+<div class="chat-widget" data-chat-widget>
+    <button class="chat-toggle" type="button" data-chat-toggle aria-label="Mở hộp chat" aria-expanded="false">
+        <span class="chat-toggle__icon">💬</span>
+        <span class="chat-toggle__badge"></span>
+    </button>
+
+    <section class="chat-panel" data-chat-panel aria-label="Hộp chat hỗ trợ">
+        <div class="chat-panel__head">
+            <div>
+                <strong>Lzon Poke Support</strong>
+                <span><i></i> Đang online</span>
+            </div>
+            <button type="button" data-chat-close aria-label="Đóng hộp chat">×</button>
+        </div>
+
+        <div class="chat-panel__body" data-chat-messages>
+            <div class="chat-message bot">Chào bạn, shop có thể tư vấn mẫu figure, giá hoặc tình trạng hàng nhé.</div>
+            <div class="chat-quick-actions">
+                <button type="button" data-chat-suggest="Mình muốn tư vấn một mẫu figure Pokemon.">Tư vấn mẫu</button>
+                <button type="button" data-chat-suggest="Shop còn hàng mẫu nào dưới 3 triệu không?">Dưới 3 triệu</button>
+                <button type="button" data-chat-suggest="Mình muốn hỏi về phí ship và đóng gói.">Phí ship</button>
+            </div>
+        </div>
+
+        <form class="chat-panel__form" data-chat-form>
+            <input type="text" data-chat-input placeholder="Nhập tin nhắn..." autocomplete="off">
+            <button type="submit">Gửi</button>
+        </form>
+
+        <div class="chat-panel__links">
+            <a href="https://m.me/nguyen.vinh.562690" target="_blank" rel="noopener">Messenger</a>
+            <a href="https://www.facebook.com/nguyen.vinh.562690" target="_blank" rel="noopener">Facebook</a>
+        </div>
+    </section>
 </div>
-
-<style>
-.floating-contact {
-    position: fixed;
-    right: 18px;
-    bottom: 18px;
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.contact-circle {
-    width: 58px;
-    height: 58px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
-    transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.contact-circle:hover {
-    transform: scale(1.08);
-    opacity: 0.95;
-}
-
-.contact-support {
-    background: #2f2f2f;
-    color: #fff;
-    font-size: 24px;
-}
-
-.contact-messenger {
-    background: #1877f2;
-}
-
-.contact-messenger svg {
-    display: block;
-}
-
-@media (max-width: 768px) {
-    .floating-contact {
-        right: 12px;
-        bottom: 12px;
-    }
-
-    .contact-circle {
-        width: 52px;
-        height: 52px;
-    }
-}
-</style>
 
 <script src="<?= url('assets/js/main.js') ?>"></script>
 

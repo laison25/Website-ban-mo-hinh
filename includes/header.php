@@ -9,10 +9,10 @@ $currentPath = basename(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH));
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= e($pageTitle ?? APP_NAME) ?></title>
-    <link rel="stylesheet" href="<?= url('assets/css/style.css') ?>">
+    <link rel="stylesheet" href="assets/css/style.css?v=<?= time() ?>">
 </head>
 <body>
-<div class="topbar">Summer Sale for all Swim Suits and Free Express Delivery - OFF 50% <span>ShopNow</span></div>
+<div class="topbar">Miễn phí giao hàng cho đơn từ 5.000.000đ <span>Nhận tư vấn sưu tầm ngay</span></div>
 
 <header class="site-header">
     <div class="container nav-wrap">
@@ -20,12 +20,13 @@ $currentPath = basename(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH));
         <a class="logo" href="<?= url('index.php') ?>">Lzon Poke</a>
 
         <nav class="nav-menu">
-            <a href="<?= url('index.php') ?>" class="<?= $currentPath === 'index.php' || $currentPath === '' ? 'active' : '' ?>">Home</a>
-            <a href="<?= url('index.php#products') ?>">Products</a>
-            <a href="<?= url('cart.php') ?>" class="<?= $currentPath === 'cart.php' ? 'active' : '' ?>">Cart</a>
+            <a href="<?= url('index.php') ?>" class="<?= $currentPath === 'index.php' || $currentPath === '' ? 'active' : '' ?>">Trang chủ</a>
+            <a href="<?= url('index.php#products') ?>">Sản phẩm</a>
+            <a href="<?= url('cart.php') ?>" class="<?= $currentPath === 'cart.php' ? 'active' : '' ?>">Giỏ hàng</a>
+            <a href="<?= url('wishlist.php') ?>" class="<?= $currentPath === 'wishlist.php' ? 'active' : '' ?>">Yêu thích</a>
 
             <?php if ($user && !is_admin()): ?>
-                <a href="<?= url('order-history.php') ?>" class="<?= $currentPath === 'order-history.php' ? 'active' : '' ?>">My Orders</a>
+                <a href="<?= url('order-history.php') ?>" class="<?= $currentPath === 'order-history.php' ? 'active' : '' ?>">Đơn hàng</a>
             <?php endif; ?>
 
             <?php if (is_admin()): ?>
@@ -35,28 +36,19 @@ $currentPath = basename(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH));
 
         <div class="nav-actions">
 
-            <div class="search-suggest-wrap" style="position:relative;">
+            <div class="search-suggest-wrap">
                 <form action="<?= url('index.php') ?>" method="get" class="search-form" autocomplete="off">
                     <input
                         type="text"
                         id="searchBox"
                         name="keyword"
-                        placeholder="What are you looking for?"
+                        placeholder="Tìm figure, studio, dòng sản phẩm..."
                         value="<?= e($_GET['keyword'] ?? '') ?>"
                     >
                     <button type="submit" aria-label="Tìm kiếm">🔎</button>
                 </form>
 
-                <div id="searchSuggestions" style="
-                    position:absolute;
-                    top:110%;
-                    left:0;
-                    width:100%;
-                    background:#fff;
-                    border:1px solid #ddd;
-                    display:none;
-                    z-index:999;
-                "></div>
+                <div id="searchSuggestions"></div>
             </div>
 
             <a class="icon-link cart-link" href="<?= url('cart.php') ?>">
@@ -68,15 +60,19 @@ $currentPath = basename(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH));
 
             <?php if ($user): ?>
                 <div class="header-user-box">
+                    <span class="header-user-avatar"><?= e(strtoupper(substr($user['full_name'], 0, 1))) ?></span>
                     <div class="header-user-info">
                         <strong><?= e($user['full_name']) ?></strong>
-                        <span><?= is_admin() ? 'Admin' : 'Customer' ?></span>
+                        <span><?= is_admin() ? 'Quản trị' : 'Khách hàng' ?></span>
                     </div>
-                    <a class="header-logout-btn" href="<?= url('logout.php') ?>">Logout</a>
+                    <div class="header-user-actions">
+                        <a class="header-account-btn" href="<?= url('account-settings.php') ?>">Cài đặt</a>
+                        <a class="header-logout-btn" href="<?= url('logout.php') ?>">Đăng xuất</a>
+                    </div>
                 </div>
             <?php else: ?>
-                <a class="login-link" href="<?= url('login.php') ?>">Login</a>
-                <a class="primary-btn small-nav-btn" href="<?= url('register.php') ?>">Sign Up</a>
+                <a class="login-link" href="<?= url('login.php') ?>">Đăng nhập</a>
+                <a class="primary-btn small-nav-btn" href="<?= url('register.php') ?>">Đăng ký</a>
             <?php endif; ?>
 
         </div>

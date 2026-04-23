@@ -2,9 +2,9 @@
 require_once __DIR__ . '/../includes/init.php';
 require_admin();
 $pageTitle = 'Admin Dashboard - ' . APP_NAME;
-$productCount = (int) ($conn->query('SELECT COUNT(*) AS total FROM products')->fetch_assoc()['total'] ?? 0);
-$orderCount = (int) ($conn->query('SELECT COUNT(*) AS total FROM orders')->fetch_assoc()['total'] ?? 0);
-$userCount = (int) ($conn->query('SELECT COUNT(*) AS total FROM users')->fetch_assoc()['total'] ?? 0);
+$productCount = (int) (isset($conn) && $conn->query('SELECT COUNT(*) AS total FROM products') ? $conn->query('SELECT COUNT(*) AS total FROM products')->fetch_assoc()['total'] : 0);
+$orderCount = (int) (isset($conn) && $conn->query('SELECT COUNT(*) AS total FROM orders') ? $conn->query('SELECT COUNT(*) AS total FROM orders')->fetch_assoc()['total'] : 0);
+$userCount = (int) (isset($conn) && $conn->query('SELECT COUNT(*) AS total FROM users') ? $conn->query('SELECT COUNT(*) AS total FROM users')->fetch_assoc()['total'] : 0);
 include __DIR__ . '/../includes/header.php';
 ?>
 <main class="section-space">
