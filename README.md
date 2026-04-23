@@ -122,48 +122,54 @@ File database mẫu:
 
 ## Phân Công 
 
-1. Công việc chung của nhóm
-Thống nhất đề tài website bán mô hình.
-Xác định đối tượng sử dụng gồm khách hàng và quản trị viên.
-Xây dựng bố cục các trang chính dựa trên định hướng giao diện Figma.
-Triển khai website bằng PHP thuần, MySQL, HTML, CSS và JavaScript.
-Triển khai website lên hosting thật và cấu hình domain/URL public.
-Cập nhật tài liệu README và báo cáo tiến độ theo chức năng đã hoàn thiện.
-2. Công việc của Lại Nam Sơn
-Xây dựng cấu trúc dự án PHP/MySQL.
-Kết nối database MySQL và tạo dữ liệu mẫu sản phẩm.
-Xây dựng trang chủ hiển thị sản phẩm từ database.
-Xây dựng chức năng tìm kiếm và gợi ý tìm kiếm bằng AJAX.
-Xây dựng chức năng đăng ký, đăng nhập, đăng xuất.
-Thêm đăng nhập Google/Facebook ở chế độ demo và cấu hình OAuth callback.
-Thêm trang cài đặt tài khoản để cập nhật họ tên, email và mật khẩu.
-Xây dựng giỏ hàng và xử lý thêm sản phẩm vào giỏ.
-Xây dựng luồng đặt hàng và lưu lịch sử đơn hàng.
-Cải tiến checkout thành các phương thức thanh toán riêng:
-COD
-Chuyển khoản ngân hàng
-VietQR
-Ví điện tử demo
-Thẻ ATM / Visa demo
-Cải tiến giao diện header, footer, product card, hero banner, account chip và responsive.
-Cấu hình môi trường local và hosting trong includes/config.php.
-Deploy website lên hosting thật.
-Cấu hình domain/URL public để truy cập website ngoài môi trường local.
-3. Công việc của Phương
-Xây dựng trang thanh toán riêng theo từng phương thức.
-Thêm chat box hỗ trợ ở góc phải màn hình.
-Kiểm tra các chức năng chính sau khi deploy: trang chủ, sản phẩm, đăng nhập, giỏ hàng, thanh toán demo và trang admin.
-Hỗ trợ xây dựng ý tưởng nội dung website bán mô hình.
-Góp ý bố cục trang chủ, trang sản phẩm và giao diện mua hàng.
-Phối hợp hoàn thiện định hướng trình bày sản phẩm và thông tin khách hàng.
-4. Công việc của Vinh
-Xây dựng trang chi tiết sản phẩm.
-Xây dựng quản lý sản phẩm, thêm/sửa/xóa và upload ảnh sản phẩm.
-Xây dựng danh sách sản phẩm yêu thích.
-Xây dựng trang admin dashboard.
-Hỗ trợ phân tích luồng giỏ hàng và đặt hàng.
-Hỗ trợ định hướng các trạng thái đơn hàng.
-Góp ý cho phần quản lý đơn hàng và thanh toán.
+## CHI TIẾT CÔNG VIỆC ĐÃ THỰC HIỆN
+
+### 1. Công việc chung của nhóm
+- Thống nhất đề tài website bán mô hình.
+- Xác định đối tượng sử dụng gồm khách hàng và quản trị viên.
+- Xây dựng bố cục các trang chính dựa trên định hướng giao diện Figma.
+- Triển khai website bằng PHP thuần, MySQL, HTML, CSS và JavaScript.
+- Triển khai website lên hosting thật và cấu hình domain/URL public.
+- Cập nhật tài liệu README và báo cáo tiến độ theo chức năng đã hoàn thiện.
+
+### 2. Công việc của Lại Nam Sơn
+- Xây dựng cấu trúc dự án PHP/MySQL.
+- Kết nối database MySQL và tạo dữ liệu mẫu sản phẩm.
+- Xây dựng trang chủ hiển thị sản phẩm từ database.
+- Xây dựng chức năng tìm kiếm và gợi ý tìm kiếm bằng AJAX.
+- Xây dựng chức năng đăng ký, đăng nhập, đăng xuất.
+- Thêm đăng nhập Google/Facebook ở chế độ demo và cấu hình OAuth callback.
+- Thêm trang cài đặt tài khoản để cập nhật họ tên, email và mật khẩu.
+- Xây dựng giỏ hàng và xử lý thêm sản phẩm vào giỏ.
+- Xây dựng luồng đặt hàng và lưu lịch sử đơn hàng.
+- Cải tiến checkout thành các phương thức thanh toán riêng:
+  - COD
+  - Chuyển khoản ngân hàng
+  - VietQR
+  - Ví điện tử demo
+  - Thẻ ATM / Visa demo
+- Cải tiến giao diện header, footer, product card, hero banner, account chip và responsive.
+- Cấu hình môi trường local và hosting trong `includes/config.php`.
+- Deploy website lên hosting thật.
+- Cấu hình domain/URL public để truy cập website ngoài môi trường local.
+
+### 3. Công việc của Phương
+- Xây dựng trang thanh toán riêng theo từng phương thức.
+- Thêm chat box hỗ trợ ở góc phải màn hình.
+- Kiểm tra các chức năng chính sau khi deploy: trang chủ, sản phẩm, đăng nhập, giỏ hàng, thanh toán demo và trang admin.
+- Hỗ trợ xây dựng ý tưởng nội dung website bán mô hình.
+- Góp ý bố cục trang chủ, trang sản phẩm và giao diện mua hàng.
+- Phối hợp hoàn thiện định hướng trình bày sản phẩm và thông tin khách hàng.
+
+### 4. Công việc của Vinh
+- Xây dựng trang chi tiết sản phẩm.
+- Xây dựng quản lý sản phẩm, thêm/sửa/xóa và upload ảnh sản phẩm.
+- Xây dựng danh sách sản phẩm yêu thích.
+- Xây dựng trang admin dashboard.
+- Hỗ trợ phân tích luồng giỏ hàng và đặt hàng.
+- Hỗ trợ định hướng các trạng thái đơn hàng.
+- Góp ý cho phần quản lý đơn hàng và thanh toán.
+
 
 ## Tài Liệu Liên Quan
 
