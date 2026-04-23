@@ -23,10 +23,6 @@ if (count($heroSlides) < 4) {
 }
 $heroSlides = array_values($heroSlides);
 $flashSale = array_slice($products, 0, 4);
-$bestSelling = array_slice($products, 4, 4);
-if (empty($bestSelling)) {
-    $bestSelling = array_slice($products, 0, 4);
-}
 include __DIR__ . '/includes/header.php';
 ?>
 <main>
@@ -37,8 +33,8 @@ include __DIR__ . '/includes/header.php';
                 <div class="shop-top-banner__overlay"></div>
                 <div class="shop-top-banner__content">
                     <span class="shop-top-banner__eyebrow">New arrivals</span>
-                    <h1>Banner Shop Cua Ban</h1>
-                    <p>Thay anh nay bang banner shop rieng de hien thi khuyen mai, brand hoac BST noi bat.</p>
+                    <h1>Banner Shop Của Bạn</h1>
+                    <p>Khám phá các mẫu figure mới, ưu đãi nổi bật và bộ sưu tập đang được săn đón.</p>
                     <span class="shop-top-banner__cta">Mua ngay</span>
                 </div>
             </a>
@@ -73,27 +69,27 @@ include __DIR__ . '/includes/header.php';
                                         <span class="hero-tag"><?= e($item['category']) ?></span>
                                         <h1><?= e($item['name']) ?></h1>
                                         <p><?= e($item['studio']) ?> • <?= format_currency((float) $item['price']) ?></p>
-                                        <span class="hero-cta">Xem chi tiet</span>
+                                        <span class="hero-cta">Xem chi tiết</span>
                                     </div>
                                 </a>
                             <?php endforeach; ?>
                         </div>
 
                         <?php if (count($heroSlides) > 1): ?>
-                            <button class="hero-control prev" type="button" data-hero-prev aria-label="Banner truoc">
+                            <button class="hero-control prev" type="button" data-hero-prev aria-label="Banner trước">
                                 <span>&lsaquo;</span>
                             </button>
-                            <button class="hero-control next" type="button" data-hero-next aria-label="Banner tiep theo">
+                            <button class="hero-control next" type="button" data-hero-next aria-label="Banner tiếp theo">
                                 <span>&rsaquo;</span>
                             </button>
 
-                            <div class="hero-dots" aria-label="Danh sach banner">
+                            <div class="hero-dots" aria-label="Danh sách banner">
                                 <?php foreach ($heroSlides as $index => $item): ?>
                                     <button
                                         class="hero-dot <?= $index === 0 ? 'is-active' : '' ?>"
                                         type="button"
                                         data-hero-dot="<?= $index ?>"
-                                        aria-label="Mo banner <?= $index + 1 ?>"
+                                        aria-label="Mở banner <?= $index + 1 ?>"
                                         aria-pressed="<?= $index === 0 ? 'true' : 'false' ?>"
                                     ></button>
                                 <?php endforeach; ?>
@@ -121,7 +117,7 @@ include __DIR__ . '/includes/header.php';
             </div>
             <div class="product-grid">
                 <?php foreach ($flashSale as $product): ?>
-                    <article class="product-card figma-card" id="product-<?= (int) $product['id'] ?>">
+                    <article class="product-card figma-card" id="flash-product-<?= (int) $product['id'] ?>">
                         <a class="product-image" href="<?= url('product-detail.php?id=' . $product['id']) ?>">
                             <img src="<?= url($product['image_path']) ?>" alt="<?= e($product['name']) ?>">
                             <span class="badge-sale">-15%</span>
@@ -147,13 +143,13 @@ include __DIR__ . '/includes/header.php';
                             </div>
 
                             <?php
-                            $ratingValue = rand(35, 50) / 10;
-                            $fullStars = floor($ratingValue);
+                            $ratingValue = max(0, min(5, (int) $product['rating']));
+                            $fullStars = $ratingValue;
                             $emptyStars = 5 - $fullStars;
                             ?>
                             <div class="product-rating">
                                 <span class="stars"><?= str_repeat('★', $fullStars) . str_repeat('☆', $emptyStars) ?></span>
-                                <span class="rating-number">(<?= number_format($ratingValue, 1) ?>)</span>
+                                <span class="rating-number">(<?= (int) $product['reviews'] ?>)</span>
                             </div>
 
                             <form action="<?= url('add-to-cart.php') ?>" method="post">
@@ -206,13 +202,13 @@ include __DIR__ . '/includes/header.php';
                                 <div class="price-line"><strong><?= format_currency((float) $product['price']) ?></strong></div>
 
                                 <?php
-                                $ratingValue = rand(35, 50) / 10;
-                                $fullStars = floor($ratingValue);
+                                $ratingValue = max(0, min(5, (int) $product['rating']));
+                                $fullStars = $ratingValue;
                                 $emptyStars = 5 - $fullStars;
                                 ?>
                                 <div class="product-rating">
                                     <span class="stars"><?= str_repeat('★', $fullStars) . str_repeat('☆', $emptyStars) ?></span>
-                                    <span class="rating-number">(<?= number_format($ratingValue, 1) ?>)</span>
+                                    <span class="rating-number">(<?= (int) $product['reviews'] ?>)</span>
                                 </div>
 
                                 <div class="card-actions stretch">
