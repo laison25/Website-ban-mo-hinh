@@ -3,7 +3,10 @@ require_once __DIR__ . '/includes/init.php';
 $pageTitle = 'Trang chủ - ' . APP_NAME;
 $keyword = trim($_GET['keyword'] ?? '');
 $category = trim($_GET['category'] ?? '');
-$products = fetch_products($conn, $keyword, $category);
+$sort = trim($_GET['sort'] ?? 'featured');
+$minPrice = max(0, (float) ($_GET['min_price'] ?? 0));
+$maxPrice = max(0, (float) ($_GET['max_price'] ?? 0));
+$products = fetch_products($conn, $keyword, $category, $sort, $minPrice, $maxPrice);
 $categories = get_categories($conn);
 $featured = array_values(array_filter($products, fn($item) => (int) $item['is_featured'] === 1));
 $heroSlides = [];
@@ -183,6 +186,35 @@ include __DIR__ . '/includes/header.php';
                     <a class="outline-btn" href="<?= url('admin/products.php') ?>">Quản lý sản phẩm</a>
                 <?php endif; ?>
             </div>
+
+            <form class="shop-filter-bar" method="get" action="<?= url('index.php') ?>#products">
+                <input type="hidden" name="category" value="<?= e($category) ?>">
+                <div>
+                    <label>Từ khóa</label>
+                    <input type="text" name="keyword" value="<?= e($keyword) ?>" placeholder="Tên figure, studio...">
+                </div>
+                <div>
+                    <label>Giá từ</label>
+                    <input type="number" min="0" name="min_price" value="<?= $minPrice > 0 ? e((string) (int) $minPrice) : '' ?>" placeholder="0">
+                </div>
+                <div>
+                    <label>Giá đến</label>
+                    <input type="number" min="0" name="max_price" value="<?= $maxPrice > 0 ? e((string) (int) $maxPrice) : '' ?>" placeholder="20000000">
+                </div>
+                <div>
+                    <label>Sắp xếp</label>
+                    <select name="sort">
+                        <option value="featured" <?= $sort === 'featured' ? 'selected' : '' ?>>Nổi bật</option>
+                        <option value="newest" <?= $sort === 'newest' ? 'selected' : '' ?>>Mới nhất</option>
+                        <option value="price_asc" <?= $sort === 'price_asc' ? 'selected' : '' ?>>Giá thấp đến cao</option>
+                        <option value="price_desc" <?= $sort === 'price_desc' ? 'selected' : '' ?>>Giá cao đến thấp</option>
+                        <option value="name_asc" <?= $sort === 'name_asc' ? 'selected' : '' ?>>Tên A-Z</option>
+                    </select>
+                </div>
+                <button class="primary-btn" type="submit">Lọc sản phẩm</button>
+                <a class="outline-btn" href="<?= url('index.php#products') ?>">Xóa lọc</a>
+            </form>
+
             <?php if (empty($products)): ?>
                 <div class="empty-box">Không tìm thấy sản phẩm phù hợp.</div>
             <?php else: ?>

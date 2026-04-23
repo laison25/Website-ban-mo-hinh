@@ -2,8 +2,8 @@
 
 ## Thông Tin Nhóm
 - **Lại Nam Sơn** - Nhóm trưởng
-- **Nguyễn Văn Phương** - Thành viên
-- **Nguyễn Thành Vinh** - Thành viên
+- **Phương** - Thành viên
+- **Vinh** - Thành viên
 
 ## Giới Thiệu
 Website Bán Mô Hình là dự án xây dựng hệ thống bán hàng trực tuyến cho các sản phẩm mô hình, figure, resin statue và các bộ sưu tập liên quan. Website hỗ trợ khách hàng xem sản phẩm, tìm kiếm, thêm vào giỏ hàng, lưu sản phẩm yêu thích, đặt hàng và theo dõi lịch sử đơn hàng.
@@ -24,8 +24,7 @@ Dự án được xây dựng bằng PHP thuần kết hợp MySQL, giao diện 
 ### 1. Chức năng người dùng
 - Đăng ký tài khoản khách hàng.
 - Đăng nhập, đăng xuất bằng tài khoản thường.
-- Hỗ trợ đăng nhập Google .
-- Hỗ trợ đăng nhậpFacebook ở chế độ demo 
+- Hỗ trợ đăng nhập Google/Facebook ở chế độ demo và có cấu hình callback OAuth.
 - Cài đặt tài khoản: cập nhật họ tên, email và đổi mật khẩu.
 - Xem danh sách sản phẩm.
 - Xem chi tiết từng sản phẩm.
@@ -116,65 +115,61 @@ File database mẫu:
    - Admin: `admin / 123456`
    - User: `user / 123456`
 
+## Triển Khai Hosting Và Domain
+- Dự án đã được triển khai thử nghiệm trên hosting thật để kiểm tra khả năng chạy ngoài môi trường local.
+- Đã cấu hình website chạy trên domain riêng/đường dẫn public của hosting.
+- Đã tách cấu hình môi trường local và hosting trong `includes/config.php`.
+- Khi chạy local, hệ thống dùng cấu hình XAMPP và database local.
+- Khi chạy trên hosting, hệ thống dùng thông tin database hosting và URL public.
+- Đã xử lý đường dẫn CSS/JS, ảnh sản phẩm và link điều hướng để hạn chế lỗi khi chuyển từ local sang hosting.
+- Đã kiểm tra các chức năng chính trên môi trường triển khai:
+  - Trang chủ
+  - Đăng nhập/đăng ký
+  - Danh sách sản phẩm
+  - Chi tiết sản phẩm
+  - Giỏ hàng
+  - Thanh toán demo
+  - Trang quản trị
+
 ## Đối Tượng Sử Dụng
 - **Khách hàng:** xem sản phẩm, tìm kiếm, yêu thích, thêm giỏ hàng, đặt hàng và xem lịch sử đơn.
 - **Quản trị viên:** quản lý sản phẩm, đơn hàng, ảnh sản phẩm và dữ liệu hệ thống.
 
-## Phân Công 
+## Phân Công Chi Tiết
 
-## CHI TIẾT CÔNG VIỆC ĐÃ THỰC HIỆN
-
-### 1. Công việc chung của nhóm
-- Thống nhất đề tài website bán mô hình.
-- Xác định đối tượng sử dụng gồm khách hàng và quản trị viên.
-- Xây dựng bố cục các trang chính dựa trên định hướng giao diện Figma.
-- Triển khai website bằng PHP thuần, MySQL, HTML, CSS và JavaScript.
-- Triển khai website lên hosting thật và cấu hình domain/URL public.
-- Cập nhật tài liệu README và báo cáo tiến độ theo chức năng đã hoàn thiện.
-
-### 2. Công việc của Lại Nam Sơn
-- Xây dựng cấu trúc dự án PHP/MySQL.
-- Kết nối database MySQL và tạo dữ liệu mẫu sản phẩm.
-- Xây dựng trang chủ hiển thị sản phẩm từ database.
-- Xây dựng chức năng tìm kiếm và gợi ý tìm kiếm bằng AJAX.
-- Xây dựng chức năng đăng ký, đăng nhập, đăng xuất.
-- Thêm đăng nhập Google/Facebook ở chế độ demo và cấu hình OAuth callback.
-- Thêm trang cài đặt tài khoản để cập nhật họ tên, email và mật khẩu.
-- Xây dựng giỏ hàng và xử lý thêm sản phẩm vào giỏ.
-- Xây dựng luồng đặt hàng và lưu lịch sử đơn hàng.
-- Cải tiến checkout thành các phương thức thanh toán riêng:
-  - COD
-  - Chuyển khoản ngân hàng
-  - VietQR
-  - Ví điện tử demo
-  - Thẻ ATM / Visa demo
-- Cải tiến giao diện header, footer, product card, hero banner, account chip và responsive.
-- Cấu hình môi trường local và hosting trong `includes/config.php`.
-- Deploy website lên hosting thật.
-- Cấu hình domain/URL public để truy cập website ngoài môi trường local.
-
-### 3. Công việc của Phương
-- Xây dựng trang thanh toán riêng theo từng phương thức.
-- Thêm chat box hỗ trợ ở góc phải màn hình.
-- Kiểm tra các chức năng chính sau khi deploy: trang chủ, sản phẩm, đăng nhập, giỏ hàng, thanh toán demo và trang admin.
-- Hỗ trợ xây dựng ý tưởng nội dung website bán mô hình.
-- Góp ý bố cục trang chủ, trang sản phẩm và giao diện mua hàng.
-- Phối hợp hoàn thiện định hướng trình bày sản phẩm và thông tin khách hàng.
-
-### 4. Công việc của Vinh
+### Lại Nam Sơn
+- Phụ trách chính việc triển khai source code PHP/MySQL.
+- Thiết kế và hoàn thiện giao diện trang chủ, header, footer, product card và responsive.
+- Xây dựng chức năng hiển thị danh sách sản phẩm từ database.
 - Xây dựng trang chi tiết sản phẩm.
-- Xây dựng quản lý sản phẩm, thêm/sửa/xóa và upload ảnh sản phẩm.
-- Xây dựng danh sách sản phẩm yêu thích.
-- Xây dựng trang admin dashboard.
-- Hỗ trợ phân tích luồng giỏ hàng và đặt hàng.
-- Hỗ trợ định hướng các trạng thái đơn hàng.
-- Góp ý cho phần quản lý đơn hàng và thanh toán.
+- Xây dựng chức năng tìm kiếm và gợi ý tìm kiếm AJAX.
+- Xây dựng đăng ký, đăng nhập, đăng xuất và cài đặt tài khoản.
+- Cấu hình đăng nhập Google/Facebook ở chế độ demo và callback OAuth.
+- Xây dựng giỏ hàng, danh sách yêu thích và lịch sử đơn hàng.
+- Xây dựng checkout nhiều phương thức và trang thanh toán demo.
+- Xây dựng dashboard admin, quản lý sản phẩm, upload ảnh và quản lý đơn hàng.
+- Cấu hình database, dữ liệu mẫu và bổ sung sản phẩm.
+- Sửa lỗi đường dẫn CSS/JS trong trang admin.
+- Triển khai website lên hosting thật và cấu hình domain/URL public.
+- Cập nhật README, README.txt và báo cáo tiến độ.
 
+### Phương
+- Hỗ trợ xây dựng ý tưởng đề tài website bán mô hình.
+- Hỗ trợ xác định nội dung hiển thị trên các trang chính.
+- Góp ý bố cục giao diện trang chủ, trang sản phẩm và trang chi tiết.
+- Hỗ trợ kiểm tra trải nghiệm người dùng ở các chức năng mua hàng.
+- Phối hợp rà soát nội dung tài liệu và báo cáo.
+
+### Vinh
+- Hỗ trợ phân tích luồng giỏ hàng và đặt hàng.
+- Hỗ trợ xây dựng ý tưởng cho phần thanh toán và trạng thái đơn hàng.
+- Góp ý cho trang quản lý đơn hàng của admin.
+- Hỗ trợ kiểm tra các chức năng liên quan đến đơn hàng.
+- Phối hợp kiểm tra lỗi giao diện và luồng thao tác người dùng.
 
 ## Tài Liệu Liên Quan
-
 - [SRS chức năng Đăng nhập hệ thống](./SRS_dang_nhap_website_ban_mo_hinh.md)
-- [Báo cáo tiến độ ngày 23/04/2026](./reports/REPORT_03042026.md)
+- [Báo cáo tiến độ ngày 03/04/2026](./reports/REPORT_03042026.md)
 
 ## Ghi Chú
 Dự án đã hoàn thiện các chức năng cơ bản của một website bán mô hình: sản phẩm, tài khoản, giỏ hàng, yêu thích, checkout nhiều phương thức, thanh toán demo, lịch sử đơn hàng, chat hỗ trợ và trang quản trị. Một số phần như thanh toán ví điện tử/thẻ và đăng nhập social đang ở mức mô phỏng/demo để phù hợp với môi trường đồ án.

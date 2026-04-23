@@ -34,6 +34,15 @@ $provider = strtolower(trim($_GET['provider'] ?? ($_SESSION['oauth_provider'] ??
 $name = trim($_GET['name'] ?? '');
 $email = trim($_GET['email'] ?? '');
 $code = trim($_GET['code'] ?? '');
+$redirectUri = url('oauth_callback.php');
+
+if ($provider === 'google' && defined('GOOGLE_REDIRECT_URI') && GOOGLE_REDIRECT_URI !== '') {
+    $redirectUri = GOOGLE_REDIRECT_URI;
+}
+
+if ($provider === 'facebook' && defined('FACEBOOK_REDIRECT_URI') && FACEBOOK_REDIRECT_URI !== '') {
+    $redirectUri = FACEBOOK_REDIRECT_URI;
+}
 
 if ($email === '' && $code !== '') {
     $state = trim($_GET['state'] ?? '');
@@ -48,7 +57,7 @@ if ($email === '' && $code !== '') {
             'client_secret' => GOOGLE_CLIENT_SECRET,
             'code' => $code,
             'grant_type' => 'authorization_code',
-            'redirect_uri' => url('oauth_callback.php'),
+            'redirect_uri' => $redirectUri,
         ]);
 
         if (!empty($token['access_token'])) {
@@ -62,7 +71,7 @@ if ($email === '' && $code !== '') {
         $token = oauth_http_json('https://graph.facebook.com/v19.0/oauth/access_token?' . http_build_query([
             'client_id' => FACEBOOK_APP_ID,
             'client_secret' => FACEBOOK_APP_SECRET,
-            'redirect_uri' => url('oauth_callback.php'),
+            'redirect_uri' => $redirectUri,
             'code' => $code,
         ]));
 
