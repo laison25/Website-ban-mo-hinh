@@ -47,6 +47,10 @@ $state = bin2hex(random_bytes(16));
 $_SESSION['oauth_state'] = $state;
 $_SESSION['oauth_provider'] = $provider;
 
+$redirectUri = ($provider === 'google')
+    ? GOOGLE_REDIRECT_URI
+    : url('oauth_callback.php');
+
 $query = http_build_query([
     'client_id' => $providerConfig['client_id'],
     'redirect_uri' => $redirectUri,
