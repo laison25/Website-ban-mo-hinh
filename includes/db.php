@@ -2,7 +2,14 @@
 require_once __DIR__ . '/config.php';
 
 mysqli_report(MYSQLI_REPORT_OFF);
-$conn = @new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
+
+$dbHost = getenv('APP_DB_HOST') ?: DB_HOST;
+$dbPort = getenv('APP_DB_PORT') ?: DB_PORT;
+$dbName = getenv('APP_DB_NAME') ?: DB_NAME;
+$dbUser = getenv('APP_DB_USER') ?: DB_USER;
+$dbPass = getenv('APP_DB_PASS') ?: DB_PASS;
+
+$conn = @new mysqli($dbHost, $dbUser, $dbPass, $dbName, (int) $dbPort);
 
 if ($conn->connect_error) {
     http_response_code(500);

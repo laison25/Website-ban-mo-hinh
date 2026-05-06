@@ -12,6 +12,7 @@ include __DIR__ . '/../includes/header.php';
             <h1>Quản lý sản phẩm</h1>
             <div class="card-actions">
                 <a class="outline-btn" href="<?= url('admin/index.php') ?>">Dashboard</a>
+                <a class="outline-btn" href="<?= url('admin/export-products.php') ?>">Xuất sản phẩm CSV</a>
                 <a class="primary-btn" href="<?= url('admin/product-form.php') ?>">+ Thêm sản phẩm</a>
             </div>
         </div>

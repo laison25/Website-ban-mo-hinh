@@ -30,7 +30,10 @@ include __DIR__ . '/../includes/header.php';
                 <h1>Quản lý đơn hàng</h1>
                 <p class="muted">Theo dõi đơn, phương thức thanh toán và trạng thái xử lý.</p>
             </div>
-            <a class="outline-btn" href="<?= url('admin/index.php') ?>">Dashboard</a>
+            <div class="card-actions">
+                <a class="outline-btn" href="<?= url('admin/export-orders.php' . ($status !== '' ? '?status=' . urlencode($status) : '')) ?>">Xuất đơn hàng CSV</a>
+                <a class="outline-btn" href="<?= url('admin/index.php') ?>">Dashboard</a>
+            </div>
         </div>
 
         <form class="admin-filter-bar" method="get">

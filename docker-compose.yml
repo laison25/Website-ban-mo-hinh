@@ -1,0 +1,38 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      APP_DB_HOST: db
+      APP_DB_PORT: 3306
+      APP_DB_NAME: website_ban_mo_hinh
+      APP_DB_USER: root
+      APP_DB_PASS: root
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: website_ban_mo_hinh
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/website_ban_mo_hinh.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:
