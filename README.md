@@ -173,3 +173,41 @@ File database mẫu:
 
 ## Ghi Chú
 Dự án đã hoàn thiện các chức năng cơ bản của một website bán mô hình: sản phẩm, tài khoản, giỏ hàng, yêu thích, checkout nhiều phương thức, thanh toán demo, lịch sử đơn hàng, chat hỗ trợ và trang quản trị. Một số phần như thanh toán ví điện tử/thẻ và đăng nhập social đang ở mức mô phỏng/demo để phù hợp với môi trường đồ án.
+
+## Cap Nhat Moi Cho Bao Cao Ma Nguon Mo
+
+### 1. Box chat AI tu van san pham
+- Da tich hop box chat AI o goc phai giao dien website.
+- Chat box co the goi Gemini API thong qua file cau hinh `includes/gemini-config.php`.
+- Endpoint xu ly chat nam tai `ai-chat.php`; tren hosting co the doi endpoint thanh file khac nhu `geminii.php` neu can.
+- Neu khong co API key hoac API bi loi, he thong tu dong fallback ve che do tu van local dua tren MySQL.
+- AI duoc cap du lieu san pham gom ten, danh muc, studio, gia va ton kho de tu van san pham phu hop.
+
+### 2. Xuat file CSV trong admin
+- Admin co the xuat danh sach san pham CSV tai `admin/export-products.php`.
+- Admin co the xuat danh sach don hang CSV tai `admin/export-orders.php`.
+- Nut xuat CSV duoc gan vao trang quan ly san pham, trang quan ly don hang va dashboard admin.
+
+### 3. Dashboard thong ke nang cao
+- Dashboard admin hien them tong doanh thu.
+- Bo sung bieu do cot doanh thu theo cac thang gan day.
+- Bo sung thong ke trang thai don hang de ho tro bao cao va quan tri.
+
+### 4. Docker va trien khai
+- Da them `Dockerfile` va `docker-compose.yml` de co the chay website bang Docker.
+- Docker Compose gom cac dich vu: PHP/Apache, MySQL va phpMyAdmin.
+- Huong dan chay bang Docker nam trong `DEPLOY_DOCKER.md`.
+
+### 5. Du lieu va giao dien bo sung
+- Da thay logo header bang anh `assets/images/products/logo.webp` va giu chu thuong hieu Lzon Poke.
+- Da bo sung them 9 san pham moi su dung cac anh `100.jpg` den `107.jpg` va `109.jpg`.
+- File SQL them san pham moi nam tai `database/add_9_products_100_109.sql`.
+
+### 6. Cac file can upload len hosting khi cap nhat AI
+- `assets/js/main.js`
+- `assets/css/style.css`
+- `includes/footer.php`
+- `ai-chat.php` hoac endpoint dang dung tren hosting, vi du `geminii.php`
+- `includes/gemini-config.php`
+
+Luu y: Khong commit hoac public file chua API key nhu `includes/gemini-config.php` va `includes/openai-config.php`.

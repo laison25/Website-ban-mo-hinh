@@ -17,7 +17,10 @@ $currentPath = basename(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH));
 <header class="site-header">
     <div class="container nav-wrap">
 
-        <a class="logo" href="<?= url('index.php') ?>">Lzon Poke</a>
+        <a class="logo" href="<?= url('index.php') ?>" aria-label="Lzon Poke">
+            <img src="<?= url('assets/images/products/logo.webp') ?>" alt="Lzon Poke">
+            <span>Lzon<br>Poke</span>
+        </a>
 
         <nav class="nav-menu">
             <a href="<?= url('index.php') ?>" class="<?= $currentPath === 'index.php' || $currentPath === '' ? 'active' : '' ?>">Trang chủ</a>

@@ -49,23 +49,24 @@
     <div class="copyright">© <?= $year ?> Lzon Poke. All rights reserved.</div>
 </footer>
 
-<div class="chat-widget" data-chat-widget>
-    <button class="chat-toggle" type="button" data-chat-toggle aria-label="Mở hộp chat" aria-expanded="false">
-        <span class="chat-toggle__icon">💬</span>
+<div class="chat-widget" data-chat-widget data-chat-endpoint="<?= url('ai-chat.php') ?>">
+    <div class="chat-floating-label">Thắc mắc liên hệ mình nhé</div>
+    <button class="chat-toggle gemini-toggle" type="button" data-chat-toggle aria-label="Mở hộp chat Gemini AI" aria-expanded="false">
+        <span class="chat-toggle__icon gemini-mark" aria-hidden="true"></span>
         <span class="chat-toggle__badge"></span>
     </button>
 
     <section class="chat-panel" data-chat-panel aria-label="Hộp chat hỗ trợ">
         <div class="chat-panel__head">
             <div>
-                <strong>Lzon Poke Support</strong>
+                <strong>Gemini AI tư vấn</strong>
                 <span><i></i> Đang online</span>
             </div>
             <button type="button" data-chat-close aria-label="Đóng hộp chat">×</button>
         </div>
 
         <div class="chat-panel__body" data-chat-messages>
-            <div class="chat-message bot">Chào bạn, shop có thể tư vấn mẫu figure, giá hoặc tình trạng hàng nhé.</div>
+            <div class="chat-message bot">Chào bạn, mình là AI tư vấn của Lzon Poke. Bạn có thể hỏi về mẫu figure, ngân sách, tồn kho hoặc thanh toán.</div>
             <div class="chat-quick-actions">
                 <button type="button" data-chat-suggest="Mình muốn tư vấn một mẫu figure Pokemon.">Tư vấn mẫu</button>
                 <button type="button" data-chat-suggest="Shop còn hàng mẫu nào dưới 3 triệu không?">Dưới 3 triệu</button>
@@ -85,7 +86,7 @@
     </section>
 </div>
 
-<script src="<?= url('assets/js/main.js') ?>"></script>
+<script src="<?= url('assets/js/main.js') ?>?v=<?= filemtime(__DIR__ . '/../assets/js/main.js') ?>"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {

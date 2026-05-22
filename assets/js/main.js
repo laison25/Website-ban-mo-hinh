@@ -204,6 +204,8 @@ document.addEventListener('DOMContentLoaded', function () {
         var form = widget.querySelector('[data-chat-form]');
         var input = widget.querySelector('[data-chat-input]');
         var messages = widget.querySelector('[data-chat-messages]');
+        var endpoint = widget.getAttribute('data-chat-endpoint') || 'ai-chat.php';
+        var isSending = false;
 
         function setOpen(open) {
             widget.classList.toggle('is-open', open);
@@ -224,10 +226,47 @@ document.addEventListener('DOMContentLoaded', function () {
             messages.scrollTop = messages.scrollHeight;
         }
 
-        function botReply() {
-            setTimeout(function () {
-                addMessage('Shop đã nhận tin nhắn. Bạn có thể để lại mẫu cần hỏi, ngân sách và số điện thoại để shop tư vấn nhanh hơn.', 'bot');
-            }, 450);
+        function setLoading(loading) {
+            isSending = loading;
+            if (!messages) return;
+            if (!loading) {
+                var current = messages.querySelector('[data-chat-loading]');
+                if (current) current.remove();
+                return;
+            }
+            var bubble = document.createElement('div');
+            bubble.className = 'chat-message bot chat-message--loading';
+            bubble.setAttribute('data-chat-loading', '1');
+            bubble.textContent = 'AI đang tư vấn...';
+            messages.appendChild(bubble);
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function botReply(text) {
+            if (isSending) return;
+            setLoading(true);
+
+            fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: JSON.stringify({ message: text })
+            })
+                .then(function (response) { return response.json(); })
+                .then(function (data) {
+                    setLoading(false);
+                    if (!data || !data.success) {
+                        addMessage((data && data.message) || 'AI chưa trả lời được, bạn thử hỏi lại ngắn hơn nhé.', 'bot');
+                        return;
+                    }
+                    addMessage(data.reply || 'Mình chưa có gợi ý phù hợp, bạn cho thêm ngân sách hoặc tên nhân vật nhé.', 'bot');
+                })
+                .catch(function () {
+                    setLoading(false);
+                    addMessage('Hiện AI chưa kết nối được. Bạn thử lại sau hoặc hỏi shop qua Messenger nhé.', 'bot');
+                });
         }
 
         if (toggle) {
@@ -246,7 +285,7 @@ document.addEventListener('DOMContentLoaded', function () {
             button.addEventListener('click', function () {
                 var text = button.getAttribute('data-chat-suggest') || '';
                 addMessage(text, 'user');
-                botReply();
+                botReply(text);
                 setOpen(true);
             });
         });
@@ -258,7 +297,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (!text) return;
                 addMessage(text, 'user');
                 if (input) input.value = '';
-                botReply();
+                botReply(text);
             });
         }
     });

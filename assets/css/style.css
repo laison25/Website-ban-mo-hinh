@@ -1378,19 +1378,27 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 10px;
+    flex: 0 0 auto;
+    width: auto;
+    min-height: 58px;
+    color: #111;
     font-size: 24px;
-    font-weight: 800;
+    font-weight: 900;
+    line-height: 1.12;
 }
 
 .logo::before {
-    content: '';
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background:
-        linear-gradient(180deg, #d83b3b 0 48%, #ffffff 49% 51%, #111318 52% 100%);
-    border: 2px solid #111318;
-    box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.18);
+    content: none;
+}
+
+.logo img {
+    width: 58px;
+    height: 58px;
+    object-fit: contain;
+}
+
+.logo span {
+    display: block;
 }
 
 .nav-menu {
@@ -2179,6 +2187,41 @@ body {
     z-index: 9998;
 }
 
+.chat-floating-label {
+    position: absolute;
+    right: 0;
+    bottom: 76px;
+    width: max-content;
+    max-width: 230px;
+    padding: 10px 13px;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    border-radius: 12px;
+    background: #fff;
+    color: #111827;
+    box-shadow: 0 14px 34px rgba(17, 24, 39, 0.16);
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.25;
+    pointer-events: none;
+}
+
+.chat-floating-label::after {
+    content: '';
+    position: absolute;
+    right: 20px;
+    bottom: -7px;
+    width: 12px;
+    height: 12px;
+    transform: rotate(45deg);
+    border-right: 1px solid rgba(226, 232, 240, 0.9);
+    border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+    background: #fff;
+}
+
+.chat-widget.is-open .chat-floating-label {
+    display: none;
+}
+
 .chat-toggle {
     position: relative;
     width: 62px;
@@ -2194,13 +2237,57 @@ body {
     transition: transform .2s ease, background .2s ease;
 }
 
+.chat-toggle.gemini-toggle {
+    background:
+        radial-gradient(circle at 72% 26%, rgba(255, 255, 255, 0.9) 0 4px, transparent 5px),
+        linear-gradient(135deg, #4285f4 0%, #7c3aed 46%, #ec4899 100%);
+    box-shadow: 0 18px 34px rgba(66, 133, 244, 0.34);
+}
+
 .chat-toggle:hover {
     transform: translateY(-3px);
     background: var(--primary-dark);
 }
 
+.chat-toggle.gemini-toggle:hover {
+    background:
+        radial-gradient(circle at 72% 26%, rgba(255, 255, 255, 0.95) 0 4px, transparent 5px),
+        linear-gradient(135deg, #2563eb 0%, #6d28d9 46%, #db2777 100%);
+}
+
 .chat-toggle__icon {
     font-size: 27px;
+}
+
+.gemini-mark {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    display: block;
+}
+
+.gemini-mark::before,
+.gemini-mark::after {
+    content: '';
+    position: absolute;
+    inset: 50% auto auto 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    background: #fff;
+}
+
+.gemini-mark::before {
+    width: 24px;
+    height: 24px;
+    clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+}
+
+.gemini-mark::after {
+    width: 9px;
+    height: 9px;
+    left: 78%;
+    top: 22%;
+    opacity: 0.9;
+    clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
 }
 
 .chat-toggle__badge {
@@ -2218,7 +2305,7 @@ body {
     position: absolute;
     right: 0;
     bottom: 78px;
-    width: min(360px, calc(100vw - 32px));
+    width: min(520px, calc(100vw - 32px));
     overflow: hidden;
     border-radius: 14px;
     border: 1px solid var(--border);
@@ -2238,6 +2325,12 @@ body {
 
 .chat-widget.is-open .chat-toggle {
     background: var(--dark);
+}
+
+.chat-widget.is-open .chat-toggle.gemini-toggle {
+    background:
+        radial-gradient(circle at 72% 26%, rgba(255, 255, 255, 0.95) 0 4px, transparent 5px),
+        linear-gradient(135deg, #111827 0%, #3730a3 52%, #be185d 100%);
 }
 
 .chat-panel__head {
@@ -2284,8 +2377,8 @@ body {
 }
 
 .chat-panel__body {
-    max-height: 310px;
-    min-height: 230px;
+    max-height: min(540px, calc(100vh - 230px));
+    min-height: 390px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -2295,11 +2388,11 @@ body {
 }
 
 .chat-message {
-    max-width: 84%;
-    padding: 10px 12px;
+    max-width: 88%;
+    padding: 12px 14px;
     border-radius: 12px;
-    font-size: 14px;
-    line-height: 1.45;
+    font-size: 15px;
+    line-height: 1.55;
 }
 
 .chat-message.bot {
@@ -2315,6 +2408,11 @@ body {
     background: var(--primary);
     color: #fff;
     border-bottom-right-radius: 4px;
+}
+
+.chat-message--loading {
+    color: var(--muted);
+    font-style: italic;
 }
 
 .chat-quick-actions {
@@ -2346,7 +2444,7 @@ body {
 
 .chat-panel__form input {
     border-radius: 8px;
-    padding: 11px 12px;
+    padding: 14px 13px;
 }
 
 .chat-panel__form button {
