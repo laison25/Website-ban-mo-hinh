@@ -4,7 +4,6 @@
 - **Lại Nam Sơn** - Nhóm trưởng
 - **Nguyễn Văn Phương** - Thành viên
 - **Nguyễn Thành Vinh** - Thành viên
-
 ## Giới Thiệu
 Website Bán Mô Hình là dự án website thương mại điện tử dùng để bán các sản phẩm mô hình, figure, resin statue và phụ kiện sưu tầm. Website hỗ trợ khách hàng xem sản phẩm, tìm kiếm, thêm giỏ hàng, lưu yêu thích, đặt hàng, thanh toán demo, tra cứu đơn hàng và quản lý tài khoản.
 
@@ -154,6 +153,25 @@ File SQL:
    - Admin: `admin / 123456`
    - User: `user / 123456`
 
+
+## Triển Khai Hosting
+- Dự án đã được cấu hình để có thể chạy trên hosting thật, không chỉ chạy local bằng XAMPP.
+- File `includes/config.php` có logic tự nhận diện môi trường local/hosting dựa trên `SERVER_NAME`.
+- Khi chạy local, website dùng URL dạng `http://localhost/website-ban-mo-hinh-php-v3/` và database local.
+- Khi chạy trên hosting, website dùng URL public được cấu hình trong `APP_URL`.
+- Cấu hình database hosting gồm host, port, database name, username và password được tách riêng với cấu hình local.
+- Đường dẫn CSS, JavaScript, ảnh sản phẩm và link điều hướng được xử lý qua helper `url()` để hạn chế lỗi sai đường dẫn khi upload lên hosting.
+- Các chức năng chính đã được chuẩn bị để kiểm tra trên hosting:
+  - Trang chủ.
+  - Đăng ký, đăng nhập và đăng xuất.
+  - Đăng nhập Google/Facebook nếu cấu hình OAuth redirect URI đúng.
+  - Danh sách sản phẩm và chi tiết sản phẩm.
+  - Giỏ hàng, yêu thích, checkout và thanh toán demo.
+  - API Box AI qua `ai-chat.php`.
+  - Trang quản trị admin.
+- Khi upload hosting cần đảm bảo upload đủ các thư mục/file chính: `admin/`, `assets/`, `database/`, `includes/`, `uploads/`, các file PHP ở thư mục gốc và file cấu hình cần thiết.
+- Không upload công khai file chứa API key thật nếu repository hoặc hosting có thể bị lộ mã nguồn.
+
 ## Cấu Hình Cần Lưu Ý
 - Cấu hình database, URL website, VietQR và social login nằm trong `includes/config.php`.
 - File mẫu cấu hình Gemini nằm tại `includes/gemini-config.example.php`.
@@ -176,3 +194,4 @@ File SQL:
 Dự án đã có các chức năng cốt lõi của một website bán mô hình: sản phẩm, tài khoản, đăng nhập social demo, giỏ hàng, yêu thích, checkout, thanh toán demo, VietQR, lịch sử đơn hàng, tra cứu đơn hàng, chat AI tư vấn, dashboard admin, quản lý sản phẩm, quản lý đơn hàng, xuất CSV và cấu hình chạy bằng Docker.
 
 Một số phần như thanh toán ví điện tử/thẻ và đăng nhập social đang ở mức demo/mô phỏng để phù hợp với môi trường đồ án. Khi triển khai thật cần cấu hình API key, OAuth client, callback URL, thông tin ngân hàng và kiểm tra bảo mật trước khi public.
+ồ án. Khi triển khai thật cần cấu hình API key, OAuth client, callback URL, thông tin ngân hàng và kiểm tra bảo mật trước khi public.
