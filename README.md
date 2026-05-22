@@ -154,19 +154,6 @@ File SQL:
    - Admin: `admin / 123456`
    - User: `user / 123456`
 
-## Hướng Dẫn Chạy Bằng Docker
-Project đã có sẵn:
-- `Dockerfile`
-- `docker-compose.yml`
-- `DEPLOY_DOCKER.md`
-
-Chạy nhanh:
-```bash
-docker compose up -d
-```
-
-Docker Compose gồm các dịch vụ PHP/Apache, MySQL và phpMyAdmin. Xem thêm chi tiết trong `DEPLOY_DOCKER.md`.
-
 ## Cấu Hình Cần Lưu Ý
 - Cấu hình database, URL website, VietQR và social login nằm trong `includes/config.php`.
 - File mẫu cấu hình Gemini nằm tại `includes/gemini-config.example.php`.
