@@ -1,4 +1,4 @@
-# Website Bán Mô Hình
+# Website Bán Mô Hình - Lzon Poke
 
 ## Thông Tin Nhóm
 - **Lại Nam Sơn** - Nhóm trưởng
@@ -6,208 +6,188 @@
 - **Vinh** - Thành viên
 
 ## Giới Thiệu
-Website Bán Mô Hình là dự án xây dựng hệ thống bán hàng trực tuyến cho các sản phẩm mô hình, figure, resin statue và các bộ sưu tập liên quan. Website hỗ trợ khách hàng xem sản phẩm, tìm kiếm, thêm vào giỏ hàng, lưu sản phẩm yêu thích, đặt hàng và theo dõi lịch sử đơn hàng.
+Website Bán Mô Hình là dự án website thương mại điện tử dùng để bán các sản phẩm mô hình, figure, resin statue và phụ kiện sưu tầm. Website hỗ trợ khách hàng xem sản phẩm, tìm kiếm, thêm giỏ hàng, lưu yêu thích, đặt hàng, thanh toán demo, tra cứu đơn hàng và quản lý tài khoản.
 
-Dự án được xây dựng bằng PHP thuần kết hợp MySQL, giao diện HTML/CSS/JavaScript và chạy thử trên môi trường XAMPP.
+Dự án được xây dựng bằng PHP thuần, MySQL, HTML, CSS và JavaScript. Project có thể chạy local bằng XAMPP hoặc Docker.
 
-## Mục Tiêu Dự Án
-- Xây dựng website bán mô hình có giao diện rõ ràng, dễ sử dụng.
-- Hiển thị danh sách sản phẩm từ cơ sở dữ liệu MySQL.
-- Cho phép người dùng xem chi tiết sản phẩm, tìm kiếm và lọc theo danh mục.
-- Xây dựng chức năng đăng ký, đăng nhập, đăng xuất và cài đặt tài khoản.
-- Hỗ trợ giỏ hàng, danh sách yêu thích và đặt hàng trực tuyến.
-- Tích hợp nhiều phương thức thanh toán theo dạng mô phỏng website thật.
-- Cung cấp trang quản trị để admin quản lý sản phẩm, đơn hàng và theo dõi dữ liệu hệ thống.
+## Chức Năng Đã Có Trong Website
 
-## Chức Năng Đã Thực Hiện
-
-### 1. Chức năng người dùng
-- Đăng ký tài khoản khách hàng.
-- Đăng nhập, đăng xuất bằng tài khoản thường.
-- Hỗ trợ đăng nhập Google/Facebook ở chế độ demo và có cấu hình callback OAuth.
-- Cài đặt tài khoản: cập nhật họ tên, email và đổi mật khẩu.
-- Xem danh sách sản phẩm.
-- Xem chi tiết từng sản phẩm.
+### 1. Trang khách hàng
+- Trang chủ hiển thị banner, danh mục, sản phẩm nổi bật và danh sách sản phẩm.
+- Xem danh sách sản phẩm từ cơ sở dữ liệu MySQL.
+- Xem chi tiết sản phẩm gồm ảnh, tên, danh mục, studio, mô tả, giá, tồn kho, đánh giá và SKU.
 - Tìm kiếm sản phẩm theo tên, danh mục hoặc studio.
 - Gợi ý tìm kiếm sản phẩm bằng AJAX.
+- Lọc sản phẩm theo danh mục.
+- Sắp xếp sản phẩm theo nổi bật, mới nhất, tên, giá tăng dần và giá giảm dần.
+- Giao diện responsive cho desktop và mobile.
+
+### 2. Tài khoản và xác thực
+- Đăng ký tài khoản khách hàng.
+- Đăng nhập bằng email/username và mật khẩu.
+- Đăng xuất.
+- Tự động chuyển hướng sau đăng nhập theo vai trò:
+  - Admin vào trang quản trị.
+  - Khách hàng vào trang chủ.
+- Cài đặt tài khoản: cập nhật họ tên, email và đổi mật khẩu.
+- Đăng nhập nhanh bằng Google/Facebook ở chế độ demo.
+- Có sẵn luồng OAuth callback cho Google/Facebook khi cấu hình client ID, secret và redirect URI thật.
+- Tự tạo tài khoản khách hàng khi đăng nhập Google/Facebook lần đầu bằng email chưa tồn tại.
+
+### 3. Giỏ hàng và yêu thích
 - Thêm sản phẩm vào giỏ hàng.
-- Cập nhật số lượng và xem tổng tiền trong giỏ hàng.
+- Hiển thị số lượng sản phẩm trong giỏ trên header.
+- Xem giỏ hàng, cập nhật số lượng và xóa sản phẩm khỏi giỏ.
+- Tính tổng tiền giỏ hàng.
 - Lưu sản phẩm vào danh sách yêu thích.
-- Xem trang danh sách yêu thích.
-- Đặt hàng và xem lịch sử đơn hàng.
-- Xem trạng thái đơn hàng và phương thức thanh toán bằng tiếng Việt dễ hiểu.
+- Bật/tắt yêu thích bằng AJAX.
+- Xem trang danh sách sản phẩm yêu thích.
 
-### 2. Chức năng thanh toán
-- Thiết kế lại trang checkout theo từng bước giống website thương mại điện tử.
-- Hỗ trợ các phương thức thanh toán:
-  - Thanh toán khi nhận hàng (COD)
-  - Chuyển khoản ngân hàng
-  - VietQR
-  - Ví điện tử demo
-  - Thẻ ATM / Visa demo
-- Tạo trang thanh toán riêng cho từng phương thức.
-- Hiển thị QR thanh toán VietQR theo tổng tiền đơn hàng.
-- Cho phép người dùng xác nhận đã thanh toán trong môi trường demo.
-- Phân biệt trạng thái đơn hàng: chờ xác nhận, chờ thanh toán, đã thanh toán.
+### 4. Đặt hàng và thanh toán
+- Checkout theo nhiều bước: thông tin nhận hàng, kiểm tra giỏ hàng và chọn phương thức thanh toán.
+- Hỗ trợ mã giảm giá/coupon trong helper xử lý giỏ hàng.
+- Tạo đơn hàng và lưu chi tiết sản phẩm vào database.
+- Trang đặt hàng thành công.
+- Lịch sử đơn hàng của khách hàng.
+- Tra cứu đơn hàng.
+- Xem trạng thái đơn hàng bằng tiếng Việt.
+- Các phương thức thanh toán đang có:
+  - Thanh toán khi nhận hàng (COD).
+  - Chuyển khoản ngân hàng.
+  - VietQR.
+  - Ví điện tử demo.
+  - Thẻ ATM/Visa demo.
+- Hiển thị mã QR VietQR theo tổng tiền đơn hàng.
+- Cho phép xác nhận đã thanh toán trong môi trường demo.
 
-### 3. Chức năng quản trị
-- Trang dashboard quản trị.
-- Hiển thị số lượng sản phẩm, đơn hàng và người dùng.
-- Quản lý danh sách sản phẩm.
+### 5. API Box AI tư vấn sản phẩm
+- Website có Box AI tư vấn sản phẩm ở góc phải giao diện.
+- API xử lý Box AI nằm tại `ai-chat.php`.
+- Box AI có thể gọi Gemini API thông qua file cấu hình `includes/gemini-config.php`.
+- Nếu không có API key hoặc API lỗi, hệ thống fallback về tư vấn local dựa trên dữ liệu sản phẩm trong MySQL.
+- AI được cấp dữ liệu sản phẩm như tên, danh mục, studio, giá và tồn kho để tư vấn sản phẩm phù hợp.
+
+### 6. Trang quản trị admin
+- Dashboard quản trị.
+- Thống kê số lượng sản phẩm, đơn hàng, người dùng và doanh thu.
+- Biểu đồ doanh thu theo các tháng gần đây.
+- Thống kê trạng thái đơn hàng.
+- Quản lý sản phẩm.
 - Thêm, sửa, xóa sản phẩm.
 - Upload ảnh sản phẩm.
-- Quản lý đơn hàng và theo dõi trạng thái.
+- Quản lý đơn hàng và lọc theo trạng thái.
+- Xem chi tiết đơn hàng qua trang thanh toán/đơn hàng.
+- Xuất danh sách sản phẩm ra CSV.
+- Xuất danh sách đơn hàng ra CSV.
 - Điều hướng nhanh từ admin về website.
 
-### 4. Giao diện và trải nghiệm
-- Cải tiến giao diện trang chủ theo phong cách chuyên nghiệp hơn.
-- Thiết kế lại header, footer, product card, hero banner và khu vực danh mục.
-- Thêm avatar và cụm cài đặt tài khoản trên header.
-- Thêm chat box hỗ trợ ở góc phải màn hình.
-- Tối ưu responsive cho desktop và mobile.
-- Sửa lỗi đường dẫn CSS/JS khi truy cập trang admin.
-- Tự nhận diện URL local/hosting để hạn chế lỗi sai đường dẫn khi chạy trên XAMPP.
-
-## Cơ Sở Dữ Liệu
-Dự án sử dụng MySQL với các bảng chính:
-- `users`: lưu thông tin tài khoản người dùng và admin.
-- `products`: lưu thông tin sản phẩm, danh mục, giá, tồn kho và ảnh.
-- `orders`: lưu thông tin đơn hàng, khách hàng, phương thức thanh toán và trạng thái.
-- `order_items`: lưu chi tiết sản phẩm trong từng đơn hàng.
-
-File database mẫu:
-- `database/website_ban_mo_hinh.sql`
-- `database/add_10_products.sql` dùng để bổ sung thêm dữ liệu sản phẩm mẫu.
+### 7. Giao diện và triển khai
+- Header, footer, product card, banner và layout trang chủ đã được thiết kế lại.
+- Có logo thương hiệu Lzon Poke.
+- Có ảnh giao diện, ảnh sản phẩm mẫu và ảnh upload sản phẩm.
+- Tự nhận diện URL local/hosting trong `includes/config.php`.
+- Đã xử lý đường dẫn CSS/JS, ảnh và link điều hướng để chạy ổn hơn giữa local và hosting.
+- Có cấu hình Docker gồm PHP/Apache, MySQL và phpMyAdmin.
+- Có hướng dẫn triển khai Docker trong `DEPLOY_DOCKER.md`.
 
 ## Công Nghệ Sử Dụng
 - **Frontend:** HTML, CSS, JavaScript
-- **Backend:** PHP
+- **Backend:** PHP thuần
 - **Database:** MySQL
-- **Môi trường chạy thử:** XAMPP
-- **Thiết kế giao diện:** Figma
-- **Quản lý mã nguồn:** GitHub
+- **Local server:** XAMPP
+- **Container:** Docker, Docker Compose
+- **AI chat:** Gemini API hoặc fallback local
+- **OAuth:** Google/Facebook OAuth demo và callback
+- **Quản lý mã nguồn:** Git/GitHub
+
+## Cơ Sở Dữ Liệu
+Dự án sử dụng MySQL với các bảng chính:
+- `users`: lưu tài khoản khách hàng và admin.
+- `products`: lưu sản phẩm, danh mục, studio, giá, tồn kho, SKU, ảnh và trạng thái nổi bật.
+- `orders`: lưu đơn hàng, thông tin khách hàng, phương thức thanh toán, tổng tiền và trạng thái.
+- `order_items`: lưu chi tiết sản phẩm trong từng đơn hàng.
+
+File SQL:
+- `database/website_ban_mo_hinh.sql`: file database chính.
+- `database/website_ban_mo_hinh_fix.sql`: bản database fix.
+- `database/add_10_products.sql`: thêm dữ liệu sản phẩm mẫu.
+- `database/add_10_products_fix.sql`: bản fix của dữ liệu 10 sản phẩm.
+- `database/add_9_products_100_109.sql`: thêm 9 sản phẩm dùng ảnh `100.jpg` đến `107.jpg` và `109.jpg`.
 
 ## Cấu Trúc Dự Án
-- `index.php`: trang chủ và danh sách sản phẩm.
+- `index.php`: trang chủ, danh sách sản phẩm, tìm kiếm và lọc sản phẩm.
 - `product-detail.php`: trang chi tiết sản phẩm.
-- `cart.php`: trang giỏ hàng.
-- `checkout.php`: trang nhập thông tin và chọn phương thức thanh toán.
-- `payment.php`: trang xử lý/mô phỏng thanh toán.
-- `order-success.php`: trang đặt hàng thành công.
-- `order-history.php`: lịch sử đơn hàng của khách hàng.
-- `login.php`, `register.php`, `logout.php`: chức năng tài khoản.
-- `account-settings.php`: trang cài đặt tài khoản.
-- `wishlist.php`: trang danh sách yêu thích.
-- `admin/`: các trang quản trị.
+- `login.php`, `register.php`, `logout.php`: đăng nhập, đăng ký và đăng xuất.
+- `social-login.php`, `oauth_callback.php`: đăng nhập Google/Facebook và callback OAuth.
+- `account-settings.php`: cài đặt tài khoản.
+- `cart.php`, `add-to-cart.php`: giỏ hàng và thêm sản phẩm vào giỏ.
+- `wishlist.php`, `wishlist-toggle.php`, `wishlist-toggle-ajax.php`: danh sách yêu thích.
+- `checkout.php`: nhập thông tin nhận hàng và chọn phương thức thanh toán.
+- `payment.php`: trang thanh toán/mô phỏng thanh toán.
+- `confirm-payment.php`: xác nhận thanh toán demo.
+- `order-success.php`: đặt hàng thành công.
+- `order-history.php`: lịch sử đơn hàng.
+- `track-order.php`: tra cứu đơn hàng.
+- `suggest-search.php`: API gợi ý tìm kiếm AJAX.
+- `ai-chat.php`: endpoint chat AI tư vấn sản phẩm.
+- `admin/index.php`: dashboard admin.
+- `admin/products.php`: danh sách sản phẩm admin.
+- `admin/product-form.php`: thêm/sửa sản phẩm.
+- `admin/product-delete.php`: xóa sản phẩm.
+- `admin/orders.php`: quản lý đơn hàng.
+- `admin/export-products.php`: xuất sản phẩm CSV.
+- `admin/export-orders.php`: xuất đơn hàng CSV.
 - `includes/`: cấu hình, kết nối database, header, footer và hàm dùng chung.
 - `assets/`: CSS, JavaScript và hình ảnh giao diện.
+- `uploads/`: ảnh sản phẩm upload từ admin.
 - `database/`: file SQL tạo database và dữ liệu mẫu.
 - `reports/`: báo cáo tiến độ.
 
-## Hướng Dẫn Chạy Dự Án
+## Hướng Dẫn Chạy Bằng XAMPP
 1. Copy thư mục dự án vào `htdocs` của XAMPP.
 2. Tạo database tên `website_ban_mo_hinh`.
 3. Import file `database/website_ban_mo_hinh.sql` vào MySQL/phpMyAdmin.
 4. Kiểm tra cấu hình database trong `includes/config.php`.
-5. Mở website trên trình duyệt, ví dụ:
+5. Mở website trên trình duyệt:
    - `http://localhost/website-ban-mo-hinh-php-v3/`
 6. Đăng nhập tài khoản demo nếu đã import database:
    - Admin: `admin / 123456`
    - User: `user / 123456`
 
-## Triển Khai Hosting Và Domain
-- Dự án đã được triển khai thử nghiệm trên hosting thật để kiểm tra khả năng chạy ngoài môi trường local.
-- Đã cấu hình website chạy trên domain riêng/đường dẫn public của hosting.
-- Đã tách cấu hình môi trường local và hosting trong `includes/config.php`.
-- Khi chạy local, hệ thống dùng cấu hình XAMPP và database local.
-- Khi chạy trên hosting, hệ thống dùng thông tin database hosting và URL public.
-- Đã xử lý đường dẫn CSS/JS, ảnh sản phẩm và link điều hướng để hạn chế lỗi khi chuyển từ local sang hosting.
-- Đã kiểm tra các chức năng chính trên môi trường triển khai:
-  - Trang chủ
-  - Đăng nhập/đăng ký
-  - Danh sách sản phẩm
-  - Chi tiết sản phẩm
-  - Giỏ hàng
-  - Thanh toán demo
-  - Trang quản trị
+## Hướng Dẫn Chạy Bằng Docker
+Project đã có sẵn:
+- `Dockerfile`
+- `docker-compose.yml`
+- `DEPLOY_DOCKER.md`
+
+Chạy nhanh:
+```bash
+docker compose up -d
+```
+
+Docker Compose gồm các dịch vụ PHP/Apache, MySQL và phpMyAdmin. Xem thêm chi tiết trong `DEPLOY_DOCKER.md`.
+
+## Cấu Hình Cần Lưu Ý
+- Cấu hình database, URL website, VietQR và social login nằm trong `includes/config.php`.
+- File mẫu cấu hình Gemini nằm tại `includes/gemini-config.example.php`.
+- File mẫu cấu hình OpenAI nằm tại `includes/openai-config.example.php`.
+- Không public hoặc commit file chứa API key thật như `includes/gemini-config.php` và `includes/openai-config.php`.
+
+## Tài Khoản Demo
+- **Admin:** `admin / 123456`
+- **User:** `user / 123456`
 
 ## Đối Tượng Sử Dụng
-- **Khách hàng:** xem sản phẩm, tìm kiếm, yêu thích, thêm giỏ hàng, đặt hàng và xem lịch sử đơn.
-- **Quản trị viên:** quản lý sản phẩm, đơn hàng, ảnh sản phẩm và dữ liệu hệ thống.
-
-## Phân Công Chi Tiết
-
-### Lại Nam Sơn
-- Phụ trách chính việc triển khai source code PHP/MySQL.
-- Thiết kế và hoàn thiện giao diện trang chủ, header, footer, product card và responsive.
-- Xây dựng chức năng hiển thị danh sách sản phẩm từ database.
-- Xây dựng trang chi tiết sản phẩm.
-- Xây dựng chức năng tìm kiếm và gợi ý tìm kiếm AJAX.
-- Xây dựng đăng ký, đăng nhập, đăng xuất và cài đặt tài khoản.
-- Cấu hình đăng nhập Google/Facebook ở chế độ demo và callback OAuth.
-- Xây dựng giỏ hàng, danh sách yêu thích và lịch sử đơn hàng.
-- Xây dựng checkout nhiều phương thức và trang thanh toán demo.
-- Xây dựng dashboard admin, quản lý sản phẩm, upload ảnh và quản lý đơn hàng.
-- Cấu hình database, dữ liệu mẫu và bổ sung sản phẩm.
-- Sửa lỗi đường dẫn CSS/JS trong trang admin.
-- Triển khai website lên hosting thật và cấu hình domain/URL public.
-- Cập nhật README, README.txt và báo cáo tiến độ.
-
-### Phương
-- Hỗ trợ xây dựng ý tưởng đề tài website bán mô hình.
-- Hỗ trợ xác định nội dung hiển thị trên các trang chính.
-- Góp ý bố cục giao diện trang chủ, trang sản phẩm và trang chi tiết.
-- Hỗ trợ kiểm tra trải nghiệm người dùng ở các chức năng mua hàng.
-- Phối hợp rà soát nội dung tài liệu và báo cáo.
-
-### Vinh
-- Hỗ trợ phân tích luồng giỏ hàng và đặt hàng.
-- Hỗ trợ xây dựng ý tưởng cho phần thanh toán và trạng thái đơn hàng.
-- Góp ý cho trang quản lý đơn hàng của admin.
-- Hỗ trợ kiểm tra các chức năng liên quan đến đơn hàng.
-- Phối hợp kiểm tra lỗi giao diện và luồng thao tác người dùng.
+- **Khách hàng:** xem sản phẩm, tìm kiếm, yêu thích, thêm giỏ hàng, đặt hàng, thanh toán demo, tra cứu đơn và xem lịch sử đơn hàng.
+- **Quản trị viên:** quản lý sản phẩm, ảnh sản phẩm, đơn hàng, thống kê doanh thu và xuất dữ liệu CSV.
 
 ## Tài Liệu Liên Quan
 - [SRS chức năng Đăng nhập hệ thống](./SRS_dang_nhap_website_ban_mo_hinh.md)
 - [Báo cáo tiến độ ngày 03/04/2026](./reports/REPORT_03042026.md)
+- [Báo cáo mã nguồn mở](./BCCD_OPEN_SOURCE.md)
+- [Hướng dẫn Docker](./DEPLOY_DOCKER.md)
 
 ## Ghi Chú
-Dự án đã hoàn thiện các chức năng cơ bản của một website bán mô hình: sản phẩm, tài khoản, giỏ hàng, yêu thích, checkout nhiều phương thức, thanh toán demo, lịch sử đơn hàng, chat hỗ trợ và trang quản trị. Một số phần như thanh toán ví điện tử/thẻ và đăng nhập social đang ở mức mô phỏng/demo để phù hợp với môi trường đồ án.
+Dự án đã có các chức năng cốt lõi của một website bán mô hình: sản phẩm, tài khoản, đăng nhập social demo, giỏ hàng, yêu thích, checkout, thanh toán demo, VietQR, lịch sử đơn hàng, tra cứu đơn hàng, chat AI tư vấn, dashboard admin, quản lý sản phẩm, quản lý đơn hàng, xuất CSV và cấu hình chạy bằng Docker.
 
-## Cap Nhat Moi Cho Bao Cao Ma Nguon Mo
-
-### 1. Box chat AI tu van san pham
-- Da tich hop box chat AI o goc phai giao dien website.
-- Chat box co the goi Gemini API thong qua file cau hinh `includes/gemini-config.php`.
-- Endpoint xu ly chat nam tai `ai-chat.php`; tren hosting co the doi endpoint thanh file khac nhu `geminii.php` neu can.
-- Neu khong co API key hoac API bi loi, he thong tu dong fallback ve che do tu van local dua tren MySQL.
-- AI duoc cap du lieu san pham gom ten, danh muc, studio, gia va ton kho de tu van san pham phu hop.
-
-### 2. Xuat file CSV trong admin
-- Admin co the xuat danh sach san pham CSV tai `admin/export-products.php`.
-- Admin co the xuat danh sach don hang CSV tai `admin/export-orders.php`.
-- Nut xuat CSV duoc gan vao trang quan ly san pham, trang quan ly don hang va dashboard admin.
-
-### 3. Dashboard thong ke nang cao
-- Dashboard admin hien them tong doanh thu.
-- Bo sung bieu do cot doanh thu theo cac thang gan day.
-- Bo sung thong ke trang thai don hang de ho tro bao cao va quan tri.
-
-### 4. Docker va trien khai
-- Da them `Dockerfile` va `docker-compose.yml` de co the chay website bang Docker.
-- Docker Compose gom cac dich vu: PHP/Apache, MySQL va phpMyAdmin.
-- Huong dan chay bang Docker nam trong `DEPLOY_DOCKER.md`.
-
-### 5. Du lieu va giao dien bo sung
-- Da thay logo header bang anh `assets/images/products/logo.webp` va giu chu thuong hieu Lzon Poke.
-- Da bo sung them 9 san pham moi su dung cac anh `100.jpg` den `107.jpg` va `109.jpg`.
-- File SQL them san pham moi nam tai `database/add_9_products_100_109.sql`.
-
-### 6. Cac file can upload len hosting khi cap nhat AI
-- `assets/js/main.js`
-- `assets/css/style.css`
-- `includes/footer.php`
-- `ai-chat.php` hoac endpoint dang dung tren hosting, vi du `geminii.php`
-- `includes/gemini-config.php`
-
-Luu y: Khong commit hoac public file chua API key nhu `includes/gemini-config.php` va `includes/openai-config.php`.
+Một số phần như thanh toán ví điện tử/thẻ và đăng nhập social đang ở mức demo/mô phỏng để phù hợp với môi trường đồ án. Khi triển khai thật cần cấu hình API key, OAuth client, callback URL, thông tin ngân hàng và kiểm tra bảo mật trước khi public.
