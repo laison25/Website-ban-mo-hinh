@@ -184,8 +184,6 @@ Docker Compose gồm các dịch vụ PHP/Apache, MySQL và phpMyAdmin. Xem thê
 ## Tài Liệu Liên Quan
 - [SRS chức năng Đăng nhập hệ thống](./SRS_dang_nhap_website_ban_mo_hinh.md)
 - [Báo cáo tiến độ ngày 03/04/2026](./reports/REPORT_03042026.md)
-- [Báo cáo mã nguồn mở](./BCCD_OPEN_SOURCE.md)
-- [Hướng dẫn Docker](./DEPLOY_DOCKER.md)
 
 ## Ghi Chú
 Dự án đã có các chức năng cốt lõi của một website bán mô hình: sản phẩm, tài khoản, đăng nhập social demo, giỏ hàng, yêu thích, checkout, thanh toán demo, VietQR, lịch sử đơn hàng, tra cứu đơn hàng, chat AI tư vấn, dashboard admin, quản lý sản phẩm, quản lý đơn hàng, xuất CSV và cấu hình chạy bằng Docker.
