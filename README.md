@@ -5,7 +5,7 @@ Website Bán Mô Hình Anime - Lzon Poke
 
 ## Mã Nguồn Github và Dink Online Đã Deploy
 - Repository: https://github.com/laison25/Website-ban-mo-hinh
-- https://modelshop-laison.rf.gd/
+- Link Online : https://modelshop-laison.rf.gd/
 
 ## Giới Thiệu Website/Hệ Thống
 Website Bán Mô Hình là dự án website thương mại điện tử dùng để bán các sản phẩm mô hình, figure, resin statue và phụ kiện sưu tầm. Website hỗ trợ khách hàng xem sản phẩm, tìm kiếm, thêm giỏ hàng, lưu yêu thích, đặt hàng, thanh toán demo, tra cứu đơn hàng và quản lý tài khoản.
