@@ -24,8 +24,8 @@ Dự án được xây dựng bằng PHP thuần, MySQL, HTML, CSS và JavaScrip
 | Thành viên | Nhiệm vụ |
 | :-- | :-- |
 | Lại Nam Sơn | Xây dựng source PHP/MySQL, giao diện chính, tài khoản, OAuth GOOGLE , giỏ hàng, thanh toán, quản trị admin, API Box AI, Docker và tài liệu dự án. |
-| Nguyễn Văn Phương | Hỗ trợ nội dung, góp ý giao diện, kiểm thử luồng khách hàng, kiểm thử thanh toán demo/VietQR và rà soát trải nghiệm Box AI. |
-| Nguyễn Thành Vinh | Hỗ trợ phân tích luồng giỏ hàng, đặt hàng, trạng thái đơn hàng, quản lý đơn hàng admin, danh sách yêu thích và kiểm thử chức năng quản trị. |
+| Nguyễn Văn Phương | nội dung, góp ý giao diện, kiểm thử luồng khách hàng, kiểm thử thanh toán demo/VietQR và rà soát trải nghiệm Box AI. |
+| Nguyễn Thành Vinh | phân tích luồng giỏ hàng, đặt hàng, trạng thái đơn hàng, quản lý đơn hàng admin, danh sách yêu thích và kiểm thử chức năng quản trị. |
 
 ## Chức Năng Đã Có Trong Website
 
