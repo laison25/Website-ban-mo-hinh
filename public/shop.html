@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Lzon Poke · Cửa hàng mô hình sưu tầm">
+  <title>Lzon Poke · Cửa hàng mô hình</title>
+  <link rel="stylesheet" href="/shop.css">
+  <script type="module" src="/shop.js"></script>
+</head>
+<body>
+  <div class="topbar">Giảm 10% đơn hàng với mã <strong>LZON10</strong> · Tối đa 500.000đ</div>
+  <header class="top"><div class="wrap bar">
+    <a class="brand" href="/"><img src="/shop-images/logo.webp" alt="" width="58" height="58"><span>Lzon<br>Poke</span></a>
+    <nav aria-label="Điều hướng cửa hàng">
+      <a href="/" id="home-link">Trang chủ</a><a href="/#catalog">Sản phẩm</a><a href="/cart">Giỏ hàng</a><a href="/wishlist">Yêu thích</a><a href="/orders">Tra cứu</a>
+    </nav>
+    <div class="header-actions">
+      <form class="header-search" action="/#catalog" method="get" role="search"><input type="search" name="q" aria-label="Tìm sản phẩm" maxlength="100" placeholder="Tìm figure, studio, dòng sản phẩm…"><button type="submit" aria-label="Tìm kiếm">⌕</button></form>
+      <a href="/cart" id="cart-link" aria-label="Giỏ hàng"><span aria-hidden="true">🛒</span><span id="cart-count" hidden>0</span></a>
+      <a href="/account" id="account-link" class="button secondary">Đăng nhập</a><a href="/account?mode=register" id="register-link" class="button primary">Đăng ký</a>
+    </div>
+  </div></header>
+  <main id="main" class="wrap"><p role="status">Đang tải cửa hàng…</p></main>
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <section><h2>Lzon Poke</h2><p>Figure store dành cho người sưu tầm Pokémon, anime và resin statue.</p></section>
+      <section><h2>Hỗ trợ</h2><p>11 Bis Kỳ Sơn, Quận 1<br>TP. Hồ Chí Minh</p><a href="mailto:LzonPoke@gmail.com">LzonPoke@gmail.com</a></section>
+      <section><h2>Tài khoản</h2><a href="/account">Đăng nhập / Cài đặt</a><a href="/wishlist">Sản phẩm yêu thích</a><a href="/orders">Lịch sử đơn hàng</a></section>
+      <section><h2>Liên kết nhanh</h2><a href="/#catalog">Cửa hàng</a><a href="/checkout">Thanh toán</a><a href="/shop-admin">Trang quản trị</a></section>
+      <section><h2>Theo dõi shop</h2><p>Cập nhật pre-order, restock và các mẫu resin mới.</p><a href="https://www.facebook.com/nguyen.vinh.562690" target="_blank" rel="noopener noreferrer">Facebook</a><a href="https://m.me/nguyen.vinh.562690" target="_blank" rel="noopener noreferrer">Messenger</a></section>
+    </div>
+    <div class="copyright">© <span id="footer-year">2026</span> Lzon Poke</div>
+  </footer>
+  <a class="support-link" href="https://m.me/nguyen.vinh.562690" target="_blank" rel="noopener noreferrer">Hỏi shop qua Messenger</a>
+  <template id="catalog-template">
+    <section class="shop-top-banner">
+      <img src="/shop-images/main-banner.jpg" alt="" fetchpriority="high">
+      <div class="banner-content">
+        <p class="eyebrow">Premium Figure Store</p><h1>Mô hình sưu tầm<br>chính hãng</h1>
+        <p>Tuyển chọn resin, scale figure và mini figure nổi bật từ các studio được cộng đồng yêu thích.</p>
+        <a class="button accent" href="#catalog">Khám phá bộ sưu tập</a>
+        <ul class="hero-trust-row"><li>Ảnh thật rõ nét</li><li>Đóng gói an toàn</li><li>Tư vấn sưu tầm</li></ul>
+      </div>
+    </section>
+    <div class="home-layout">
+      <nav class="category-sidebar" aria-labelledby="category-title"><h2 id="category-title">Danh mục sản phẩm</h2><div id="category-links"></div></nav>
+      <section class="hero-slider" id="hero-slider" aria-label="Bộ sưu tập nổi bật" hidden>
+        <div id="showcase-slide"></div>
+        <button class="hero-control prev" type="button" aria-label="Banner trước">‹</button>
+        <button class="hero-control next" type="button" aria-label="Banner tiếp theo">›</button>
+        <div class="hero-dots" aria-label="Chọn banner"></div>
+      </section>
+    </div>
+    <section class="home-section" id="flash-section" hidden>
+      <p class="section-label">Ưu đãi hôm nay</p>
+      <header class="section-title"><div><h2>Flash Sale Figure</h2><p>Khám phá những mẫu figure đang có giá ưu đãi.</p></div></header>
+      <div class="grid" id="flash-grid"></div>
+      <div class="center-actions"><a class="button accent" href="#catalog">Tất cả sản phẩm</a></div>
+    </section>
+    <section class="home-section" id="catalog">
+      <p class="section-label">Bộ sưu tập</p>
+      <header class="section-title"><div><h2>Sản phẩm đang bán</h2><p>Duyệt các mẫu figure theo studio, kích thước, giá và tình trạng nổi bật.</p></div><p id="product-count" aria-live="polite"></p></header>
+      <form id="catalog-filters" class="filters panel" action="/#catalog" method="get">
+        <input type="hidden" name="category">
+        <label>Từ khóa<input type="search" name="q" maxlength="100" placeholder="Tên figure, studio hoặc SKU…"></label>
+        <label>Giá từ<input name="min" type="number" min="0" max="1000000000" step="1" placeholder="0"></label>
+        <label>Giá đến<input name="max" type="number" min="0" max="1000000000" step="1" placeholder="20.000.000"></label>
+        <label>Sắp xếp<select name="sort"><option value="featured">Nổi bật</option><option value="newest">Mới nhất</option><option value="low">Giá tăng dần</option><option value="high">Giá giảm dần</option></select></label>
+        <button type="submit" class="button accent">Lọc sản phẩm</button><a class="button secondary" href="/#catalog">Xóa lọc</a>
+      </form>
+      <p id="catalog-notice" class="notice" aria-live="polite"></p>
+      <div id="product-grid" class="grid"></div>
+    </section>
+    <section class="service-grid" aria-label="Dịch vụ cửa hàng">
+      <article class="panel service-item"><span aria-hidden="true">🚚</span><h3>Giao hàng an toàn</h3><p>Đóng gói chống sốc, theo dõi đơn rõ ràng.</p></article>
+      <article class="panel service-item"><span aria-hidden="true">🎧</span><h3>Tư vấn sưu tầm</h3><p>Hỗ trợ chọn mẫu theo ngân sách và không gian trưng bày.</p></article>
+      <article class="panel service-item"><span aria-hidden="true">💰</span><h3>Minh bạch giá</h3><p>Hiển thị giá, tồn kho và thông tin sản phẩm rõ ràng.</p></article>
+    </section>
+  </template>
+  <p id="shop-toast" class="shop-toast" aria-live="polite" hidden></p>
+</body>
+</html>
